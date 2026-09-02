@@ -31,11 +31,7 @@ export const SignInForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <Button
-                onClick={handleSignIn}
-            >
-                Sign in
-            </Button>
+            <Button onClick={handleSignIn}>Sign in</Button>
         </div>
     )
 }

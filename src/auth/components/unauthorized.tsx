@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
 
-export const Unauthorized = ({ children }: PropsWithChildren) => {
+export const UnauthorizedGuard = ({ children }: PropsWithChildren) => {
     return children
 }
