@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Outlet } from "@tanstack/react-router"
 
-import { UnauthorizedGuard } from "@/auth/components/unauthorized"
+import { UnauthorizedGuard } from "@/auth/components/unauthorized-guard"
 
 export const Route = createFileRoute("/__public")({
     component: RouteComponent,

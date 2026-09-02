@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { Outlet } from "@tanstack/react-router"
 
 import { AuthGuard } from "@/auth/components/auth-guard"
+import { Layout } from "@/components/ui/layout"
 
 export const Route = createFileRoute("/__protected")({
     component: RouteComponent,
@@ -10,7 +11,9 @@ export const Route = createFileRoute("/__protected")({
 function RouteComponent() {
     return (
         <AuthGuard>
-            <Outlet />
+            <Layout>
+                <Outlet />
+            </Layout>
         </AuthGuard>
     )
 }

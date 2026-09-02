@@ -9,18 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as _protectedRouteImport } from './routes/__protected'
 import { Route as _publicRouteImport } from './routes/__public'
+import { Route as _protectedIndexRouteImport } from './routes/__protected/index'
 import { Route as _publicSignInRouteImport } from './routes/__public/sign-in'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const _protectedRoute = _protectedRouteImport.update({
+  id: '/__protected',
   getParentRoute: () => rootRouteImport,
 } as any)
 const _publicRoute = _publicRouteImport.update({
   id: '/__public',
   getParentRoute: () => rootRouteImport,
+} as any)
+const _protectedIndexRoute = _protectedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => _protectedRoute,
 } as any)
 const _publicSignInRoute = _publicSignInRouteImport.update({
   id: '/sign-in',
@@ -29,39 +34,45 @@ const _publicSignInRoute = _publicSignInRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/__protected': typeof _protectedRouteWithChildren
   '/__public': typeof _publicRouteWithChildren
   '/__public/sign-in': typeof _publicSignInRoute
+  '/__protected/': typeof _protectedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/sign-in'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/sign-in'
-  id: '__root__' | '/' | '/__public' | '/__public/sign-in'
+  id:
+    | '__root__'
+    | '/__protected'
+    | '/__public'
+    | '/__public/sign-in'
+    | '/__protected/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  _protectedRoute: typeof _protectedRouteWithChildren
   _publicRoute: typeof _publicRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/__protected': {
+      id: '/__protected'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof _protectedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/__public': {
@@ -70,6 +81,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof _publicRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/__protected/': {
+      id: '/__protected/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof _protectedIndexRouteImport
+      parentRoute: typeof _protectedRoute
     }
     '/__public/sign-in': {
       id: '/__public/sign-in'
@@ -80,6 +98,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface _protectedRouteChildren {
+  _protectedIndexRoute: typeof _protectedIndexRoute
+}
+
+const _protectedRouteChildren: _protectedRouteChildren = {
+  _protectedIndexRoute: _protectedIndexRoute,
+}
+
+const _protectedRouteWithChildren = _protectedRoute._addFileChildren(
+  _protectedRouteChildren,
+)
 
 interface _publicRouteChildren {
   _publicSignInRoute: typeof _publicSignInRoute
@@ -93,7 +123,7 @@ const _publicRouteWithChildren =
   _publicRoute._addFileChildren(_publicRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  _protectedRoute: _protectedRouteWithChildren,
   _publicRoute: _publicRouteWithChildren,
 }
 export const routeTree = rootRouteImport

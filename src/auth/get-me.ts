@@ -5,4 +5,4 @@ export const GET_ME_QUERY_KEY = api.queryOptions(
     "/api/users/me",
 ).queryKey
 
-export const useMe = () => api.useSuspenseQuery("get", "/api/users/me")
+export const useMe = () => api.useQuery("get", "/api/users/me")
