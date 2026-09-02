@@ -1,20 +1,22 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Button } from '@/components/ui/button'
-import { api } from '@/api/client'
+import { createFileRoute } from "@tanstack/react-router"
 
-export const Route = createFileRoute('/')({
-  component: RouteComponent,
+import { api } from "@/api/client"
+import { SignInForm } from "@/auth/components/sign-in-form"
+import { Button } from "@/components/ui/button"
+
+export const Route = createFileRoute("/")({
+    component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data } = api.useQuery(
-    "get",
-    "/api/users"
-  )
+    const { data } = api.useQuery("get", "/api/users")
 
-  console.log(data)
+    console.log(data)
 
-  return <div>
-    <Button>Hello</Button>
-  </div>
+    return (
+        <div>
+            <SignInForm />
+            <Button>Hello</Button>
+        </div>
+    )
 }
