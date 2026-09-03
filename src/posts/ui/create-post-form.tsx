@@ -8,13 +8,15 @@ export const CreatePostForm = () => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
 
+    const isFormEmpty = !title.trim() || !content.trim()
+
     const handleCreatePost = () => {
         createPost({ body: { title, content } })
     }
 
     return <>
-        <Input onChange={(e) => setTitle(e.target.value)}></Input>
-        <Input onChange={(e) => setContent(e.target.value)}></Input>
-        <Button onClick={handleCreatePost}>Create Post</Button>
+        <Input onChange={(e) => setTitle(e.target.value)} placeholder="Title"></Input>
+        <Input onChange={(e) => setContent(e.target.value)} placeholder="Content"></Input>
+        <Button onClick={handleCreatePost} disabled={isFormEmpty}>Create Post</Button>
     </>
 }

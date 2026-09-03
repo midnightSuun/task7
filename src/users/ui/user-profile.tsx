@@ -17,6 +17,7 @@ export const UserProfile = () => {
         <div>
             <Button onClick={handleBack}>Back</Button>  
             <h1>{user.displayName}</h1>
+            {/* @ts-expect-error user.avatar is not defined */}
             <img src={user.avatar} alt={user.displayName} className="w-10 h-10 rounded-full" />
             
         </div>

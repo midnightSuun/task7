@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
 import { useLogout } from "@/auth/logout"
-import { CreatePostForm } from "@/posts/ui/create-post-form"
 
 export const Route = createFileRoute("/__protected/")({
     component: RouteComponent,
@@ -16,7 +15,6 @@ function RouteComponent() {
             
             <Link to="/users">Users</Link>
             <Link to="/posts">Posts</Link>
-            <CreatePostForm />
         </div>
     )
 }
