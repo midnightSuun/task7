@@ -13,6 +13,10 @@ import { Route as _protectedRouteImport } from './routes/__protected'
 import { Route as _publicRouteImport } from './routes/__public'
 import { Route as _protectedIndexRouteImport } from './routes/__protected/index'
 import { Route as _publicSignInRouteImport } from './routes/__public/sign-in'
+import { Route as _protectedPostsIndexRouteImport } from './routes/__protected/posts/index'
+import { Route as _protectedPostsPostIdRouteImport } from './routes/__protected/posts/$postId'
+import { Route as _protectedUsersIndexRouteImport } from './routes/__protected/users/index'
+import { Route as _protectedUsersUserIdRouteImport } from './routes/__protected/users/$userId'
 
 const _protectedRoute = _protectedRouteImport.update({
   id: '/__protected',
@@ -32,14 +36,42 @@ const _publicSignInRoute = _publicSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => _publicRoute,
 } as any)
+const _protectedPostsIndexRoute = _protectedPostsIndexRouteImport.update({
+  id: '/posts/',
+  path: '/posts/',
+  getParentRoute: () => _protectedRoute,
+} as any)
+const _protectedPostsPostIdRoute = _protectedPostsPostIdRouteImport.update({
+  id: '/posts/$postId',
+  path: '/posts/$postId',
+  getParentRoute: () => _protectedRoute,
+} as any)
+const _protectedUsersIndexRoute = _protectedUsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => _protectedRoute,
+} as any)
+const _protectedUsersUserIdRoute = _protectedUsersUserIdRouteImport.update({
+  id: '/users/$userId',
+  path: '/users/$userId',
+  getParentRoute: () => _protectedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
+  '/posts/$postId': typeof _protectedPostsPostIdRoute
+  '/users/$userId': typeof _protectedUsersUserIdRoute
+  '/posts/': typeof _protectedPostsIndexRoute
+  '/users/': typeof _protectedUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
+  '/posts/$postId': typeof _protectedPostsPostIdRoute
+  '/users/$userId': typeof _protectedUsersUserIdRoute
+  '/posts': typeof _protectedPostsIndexRoute
+  '/users': typeof _protectedUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -47,18 +79,33 @@ export interface FileRoutesById {
   '/__public': typeof _publicRouteWithChildren
   '/__public/sign-in': typeof _publicSignInRoute
   '/__protected/': typeof _protectedIndexRoute
+  '/__protected/posts/$postId': typeof _protectedPostsPostIdRoute
+  '/__protected/users/$userId': typeof _protectedUsersUserIdRoute
+  '/__protected/posts/': typeof _protectedPostsIndexRoute
+  '/__protected/users/': typeof _protectedUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in'
+  fullPaths:
+    | '/'
+    | '/sign-in'
+    | '/posts/$postId'
+    | '/users/$userId'
+    | '/posts/'
+    | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in'
+  to:
+    '/' | '/sign-in' | '/posts/$postId' | '/users/$userId' | '/posts' | '/users'
   id:
     | '__root__'
     | '/__protected'
     | '/__public'
     | '/__public/sign-in'
     | '/__protected/'
+    | '/__protected/posts/$postId'
+    | '/__protected/users/$userId'
+    | '/__protected/posts/'
+    | '/__protected/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,15 +143,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof _publicSignInRouteImport
       parentRoute: typeof _publicRoute
     }
+    '/__protected/posts/': {
+      id: '/__protected/posts/'
+      path: '/posts'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof _protectedPostsIndexRouteImport
+      parentRoute: typeof _protectedRoute
+    }
+    '/__protected/posts/$postId': {
+      id: '/__protected/posts/$postId'
+      path: '/posts/$postId'
+      fullPath: '/posts/$postId'
+      preLoaderRoute: typeof _protectedPostsPostIdRouteImport
+      parentRoute: typeof _protectedRoute
+    }
+    '/__protected/users/': {
+      id: '/__protected/users/'
+      path: '/users'
+      fullPath: '/users/'
+      preLoaderRoute: typeof _protectedUsersIndexRouteImport
+      parentRoute: typeof _protectedRoute
+    }
+    '/__protected/users/$userId': {
+      id: '/__protected/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof _protectedUsersUserIdRouteImport
+      parentRoute: typeof _protectedRoute
+    }
   }
 }
 
 interface _protectedRouteChildren {
   _protectedIndexRoute: typeof _protectedIndexRoute
+  _protectedPostsPostIdRoute: typeof _protectedPostsPostIdRoute
+  _protectedUsersUserIdRoute: typeof _protectedUsersUserIdRoute
+  _protectedPostsIndexRoute: typeof _protectedPostsIndexRoute
+  _protectedUsersIndexRoute: typeof _protectedUsersIndexRoute
 }
 
 const _protectedRouteChildren: _protectedRouteChildren = {
   _protectedIndexRoute: _protectedIndexRoute,
+  _protectedPostsPostIdRoute: _protectedPostsPostIdRoute,
+  _protectedUsersUserIdRoute: _protectedUsersUserIdRoute,
+  _protectedPostsIndexRoute: _protectedPostsIndexRoute,
+  _protectedUsersIndexRoute: _protectedUsersIndexRoute,
 }
 
 const _protectedRouteWithChildren = _protectedRoute._addFileChildren(
