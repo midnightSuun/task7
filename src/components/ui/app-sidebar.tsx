@@ -5,6 +5,7 @@ import {
     SidebarGroup,
     SidebarHeader,
 } from "@/components/ui/sidebar"
+import { NavUser } from "@/auth/components/user-nav"
 
 export function AppSidebar() {
     return (
@@ -14,7 +15,9 @@ export function AppSidebar() {
                 <SidebarGroup />
                 <SidebarGroup />
             </SidebarContent>
-            <SidebarFooter />
+            <SidebarFooter>
+                <NavUser />
+            </SidebarFooter>
         </Sidebar>
     )
 }
