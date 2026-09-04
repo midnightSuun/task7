@@ -1,6 +1,6 @@
 import { getRouteApi, useRouter } from "@tanstack/react-router"
-import { useUser } from "../api/get-user"
 import { Button } from "@/components/ui/button"
+import { useUser } from "../api/get-user"
 
 const route = getRouteApi("/__protected/users/$userId")
 
@@ -15,11 +15,13 @@ export const UserProfile = () => {
 
     return (
         <div>
-            <Button onClick={handleBack}>Back</Button>  
+            <Button onClick={handleBack}>Back</Button>
             <h1>{user.displayName}</h1>
-            {/* @ts-expect-error user.avatar is not defined */}
-            <img src={user.avatar} alt={user.displayName} className="w-10 h-10 rounded-full" />
-            
+            <img
+                src={user.avatar ?? undefined}
+                alt={user.displayName}
+                className="w-10 h-10 rounded-full"
+            />
         </div>
     )
 }

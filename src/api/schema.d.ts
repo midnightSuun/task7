@@ -6,188 +6,208 @@
 export interface paths {
     "/api/users/me": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** Get the currently authenticated user */
-        get: operations["UsersController_getMe"]
-        put?: never
-        post?: never
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        get: operations["UsersController_getMe"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/users/me/avatar": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        get?: never
-        put?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
         /** Upload or replace the current user avatar */
-        post: operations["UsersController_uploadAvatar"]
+        post: operations["UsersController_uploadAvatar"];
         /** Remove the current user avatar */
-        delete: operations["UsersController_removeAvatar"]
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        delete: operations["UsersController_removeAvatar"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/users": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** List users with pagination */
-        get: operations["UsersController_findAll"]
-        put?: never
-        post?: never
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        get: operations["UsersController_findAll"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/users/{id}/follow": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        get?: never
-        put?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
         /**
          * Toggle follow state
          * @description Follows the user if you are not following them yet, otherwise unfollows.
          */
-        post: operations["UsersController_toggleFollow"]
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        post: operations["UsersController_toggleFollow"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/users/{id}": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** Get a user by id */
-        get: operations["UsersController_findOne"]
-        put?: never
-        post?: never
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        get: operations["UsersController_findOne"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/messages": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        get?: never
-        put?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
         /**
          * Send a direct message
          * @description Pass recipientId to start or continue a 1:1 DM, or conversationId to send into an existing thread. Connected WebSocket clients (except the sender) receive `{ type: "NEW_MESSAGE", payload }` with this message.
          */
-        post: operations["ConversationsController_createMessage"]
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        post: operations["ConversationsController_createMessage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/conversations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List conversations of the current user
+         * @description Returns 1:1 threads the current user belongs to, newest activity first. Each item includes the last message and the other participant.
+         */
+        get: operations["ConversationsController_findAll"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/conversations/{conversationId}/messages": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** List messages in a conversation */
-        get: operations["ConversationsController_findMessages"]
-        put?: never
-        post?: never
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        get: operations["ConversationsController_findMessages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/posts": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** List posts */
-        get: operations["PostsController_findAll"]
-        put?: never
+        get: operations["PostsController_findAll"];
+        put?: never;
         /** Create a post */
-        post: operations["PostsController_create"]
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        post: operations["PostsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/posts/{id}/like": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        get?: never
-        put?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
         /**
          * Toggle like on a post
          * @description Likes the post if you have not liked it yet, otherwise unlikes.
          */
-        post: operations["PostsController_toggleLike"]
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        post: operations["PostsController_toggleLike"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/posts/{id}": {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         /** Get a post by id */
-        get: operations["PostsController_findOne"]
-        put?: never
-        post?: never
+        get: operations["PostsController_findOne"];
+        put?: never;
+        post?: never;
         /** Delete your own post */
-        delete: operations["PostsController_deleteOwn"]
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
+        delete: operations["PostsController_deleteOwn"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-export type webhooks = Record<string, never>
+export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         UserResponseDto: {
@@ -195,618 +215,666 @@ export interface components {
              * @description Firebase user id
              * @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g
              */
-            id: string
+            id: string;
             /** @example Jane Doe */
-            displayName: string
+            displayName: string;
             /** @example jane@example.com */
-            primaryEmail?: Record<string, never> | null
+            primaryEmail?: string | null;
             /** @example http://localhost:9000/avatars/xY7kQp2mN8vR4tLw9sZcAb1dEf3g */
-            avatar?: Record<string, never> | null
+            avatar?: string | null;
             /**
              * Format: date-time
              * @example 2026-07-24T19:00:00.000Z
              */
-            createdAt: string
-        }
+            createdAt: string;
+        };
         UploadAvatarDto: {
             /**
              * Format: binary
              * @description Avatar image (jpeg, png, webp, or gif, max 2 MB)
              */
-            file: string
-        }
-        PaginationMetaDto: {
-            /** @example 1 */
-            page: number
+            file: string;
+        };
+        CursorPaginationMetaDto: {
             /** @example 20 */
-            limit: number
-            /** @example 42 */
-            total: number
-            /** @example 3 */
-            totalPages: number
-        }
+            limit: number;
+            /** @example eyJjcmVhdGVkQXQiOiIyMDI2LTA4LTI1VDEyOjAwOjAwLjAwMFoiLCJpZCI6IjNhIn0 */
+            nextCursor?: string | null;
+            /** @example true */
+            hasMore: boolean;
+        };
         PaginatedUsersResponseDto: {
-            data: components["schemas"]["UserResponseDto"][]
-            meta: components["schemas"]["PaginationMetaDto"]
-        }
+            data: components["schemas"]["UserResponseDto"][];
+            meta: components["schemas"]["CursorPaginationMetaDto"];
+        };
         ToggleFollowResponseDto: {
             /**
              * @description User id whose follow state was toggled
              * @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g
              */
-            userId: string
+            userId: string;
             /**
              * @description Whether the current user now follows this user
              * @example true
              */
-            following: boolean
-        }
+            following: boolean;
+        };
         MessageResponseDto: {
             /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
-            id: string
+            id: string;
             /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
-            conversationId: string
+            conversationId: string;
             /** @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g */
-            senderId: string
+            senderId: string;
             /** @example Hey, are you free later? */
-            body: string
+            body: string;
             /**
              * Format: date-time
              * @example 2026-08-25T18:00:00.000Z
              */
-            createdAt: string
-        }
+            createdAt: string;
+        };
         NewMessageWsEventDto: {
             /**
              * @example NEW_MESSAGE
              * @enum {string}
              */
-            type: "NEW_MESSAGE"
-            payload: components["schemas"]["MessageResponseDto"]
-        }
+            type: "NEW_MESSAGE";
+            payload: components["schemas"]["MessageResponseDto"];
+        };
         CreateMessageDto: {
             /**
              * @description Message text
              * @example Hey, are you free later?
              */
-            body: string
+            body: string;
             /**
              * @description Other user id. Creates or reuses the 1:1 DM when conversationId is omitted.
              * @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g
              */
-            recipientId?: string
+            recipientId?: string;
             /**
              * @description Existing conversation id. Required when recipientId is omitted.
              * @example 3fa85f64-5717-4562-b3fc-2c963f66afa6
              */
-            conversationId?: string
-        }
-        CursorPaginationMetaDto: {
-            /** @example 20 */
-            limit: number
-            /** @example eyJjcmVhdGVkQXQiOiIyMDI2LTA4LTI1VDEyOjAwOjAwLjAwMFoiLCJpZCI6IjNhIn0 */
-            nextCursor?: Record<string, never> | null
-            /** @example true */
-            hasMore: boolean
-        }
+            conversationId?: string;
+        };
+        ConversationResponseDto: {
+            /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
+            id: string;
+            /**
+             * @example dm
+             * @enum {string}
+             */
+            type: "dm";
+            /**
+             * Format: date-time
+             * @example 2026-08-25T18:00:00.000Z
+             */
+            createdAt: string;
+            /**
+             * Format: date-time
+             * @example 2026-08-25T18:00:00.000Z
+             */
+            lastMessageAt?: string | null;
+            lastMessage?: components["schemas"]["MessageResponseDto"] | null;
+            /** @description Other members of the conversation. The current user is omitted. */
+            participants: components["schemas"]["UserResponseDto"][];
+        };
+        PaginatedConversationsResponseDto: {
+            data: components["schemas"]["ConversationResponseDto"][];
+            meta: components["schemas"]["CursorPaginationMetaDto"];
+        };
         PaginatedMessagesResponseDto: {
-            data: components["schemas"]["MessageResponseDto"][]
-            meta: components["schemas"]["CursorPaginationMetaDto"]
-        }
+            data: components["schemas"]["MessageResponseDto"][];
+            meta: components["schemas"]["CursorPaginationMetaDto"];
+        };
         CreatePostDto: {
             /** @example Hello world */
-            title: string
+            title: string;
             /** @example This is my first post. */
-            content: string
-        }
+            content: string;
+        };
         PostLikesDto: {
             /** @example 42 */
-            count: number
+            count: number;
             /** @example true */
-            likedByMe: boolean
+            likedByMe: boolean;
             /** @description Up to 10 users who liked this post, newest first */
-            users: components["schemas"]["UserResponseDto"][]
-        }
+            users: components["schemas"]["UserResponseDto"][];
+        };
         PostResponseDto: {
             /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
-            id: string
+            id: string;
             /** @example Hello world */
-            title: string
+            title: string;
             /** @example This is my first post. */
-            content: string
+            content: string;
             /** @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g */
-            authorId: string
+            authorId: string;
             /**
              * Format: date-time
              * @example 2026-08-29T00:00:00.000Z
              */
-            createdAt: string
-            likes: components["schemas"]["PostLikesDto"]
-        }
+            createdAt: string;
+            likes: components["schemas"]["PostLikesDto"];
+        };
         PaginatedPostsResponseDto: {
-            data: components["schemas"]["PostResponseDto"][]
-            meta: components["schemas"]["PaginationMetaDto"]
-        }
+            data: components["schemas"]["PostResponseDto"][];
+            meta: components["schemas"]["CursorPaginationMetaDto"];
+        };
         TogglePostLikeResponseDto: {
             /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
-            postId: string
+            postId: string;
             /**
              * @description Whether the current user now likes this post
              * @example true
              */
-            liked: boolean
-        }
-    }
-    responses: never
-    parameters: never
-    requestBodies: never
-    headers: never
-    pathItems: never
+            liked: boolean;
+        };
+    };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-export type $defs = Record<string, never>
+export type $defs = Record<string, never>;
 export interface operations {
     UsersController_getMe: {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        requestBody?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["UserResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     UsersController_uploadAvatar: {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         requestBody: {
             content: {
-                "multipart/form-data": components["schemas"]["UploadAvatarDto"]
-            }
-        }
+                "multipart/form-data": components["schemas"]["UploadAvatarDto"];
+            };
+        };
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["UserResponseDto"];
+                };
+            };
             /** @description Missing file or unsupported image type */
             400: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Avatar exceeds 2 MB */
             413: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     UsersController_removeAvatar: {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        requestBody?: never
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["UserResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     UsersController_findAll: {
         parameters: {
             query?: {
-                page?: number
-                limit?: number
+                limit?: number;
+                /** @description Opaque cursor from the previous page (newest first) */
+                cursor?: string;
                 /** @description Search by display name or primary email */
-                q?: string
-            }
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        requestBody?: never
+                q?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["PaginatedUsersResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["PaginatedUsersResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     UsersController_toggleFollow: {
         parameters: {
-            query?: never
-            header?: never
+            query?: never;
+            header?: never;
             path: {
                 /** @description Firebase user id */
-                id: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["ToggleFollowResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["ToggleFollowResponseDto"];
+                };
+            };
             /** @description Cannot follow yourself */
             400: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description User not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     UsersController_findOne: {
         parameters: {
-            query?: never
-            header?: never
+            query?: never;
+            header?: never;
             path: {
                 /** @description Firebase user id */
-                id: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["UserResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description User not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     ConversationsController_createMessage: {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["CreateMessageDto"]
-            }
-        }
+                "application/json": components["schemas"]["CreateMessageDto"];
+            };
+        };
         responses: {
             201: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["MessageResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["MessageResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Recipient or conversation was not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ConversationsController_findAll: {
+        parameters: {
+            query?: {
+                limit?: number;
+                /** @description Opaque cursor from the previous page (newest first) */
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedConversationsResponseDto"];
+                };
+            };
+            /** @description Missing or invalid Firebase token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     ConversationsController_findMessages: {
         parameters: {
             query?: {
-                limit?: number
+                limit?: number;
                 /** @description Opaque cursor from the previous page (newest first) */
-                cursor?: string
-            }
-            header?: never
+                cursor?: string;
+            };
+            header?: never;
             path: {
                 /** @description Conversation UUID */
-                conversationId: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                conversationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["PaginatedMessagesResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["PaginatedMessagesResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Conversation not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     PostsController_findAll: {
         parameters: {
             query?: {
-                page?: number
-                limit?: number
+                limit?: number;
+                /** @description Opaque cursor from the previous page (newest first) */
+                cursor?: string;
                 /** @description Filter posts by author user id */
-                authorId?: string
-            }
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        requestBody?: never
+                authorId?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["PaginatedPostsResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["PaginatedPostsResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     PostsController_create: {
         parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["CreatePostDto"]
-            }
-        }
+                "application/json": components["schemas"]["CreatePostDto"];
+            };
+        };
         responses: {
             201: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["PostResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["PostResponseDto"];
+                };
+            };
             /** @description Invalid title or content */
             400: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     PostsController_toggleLike: {
         parameters: {
-            query?: never
-            header?: never
+            query?: never;
+            header?: never;
             path: {
                 /** @description Resource UUID */
-                id: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["TogglePostLikeResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["TogglePostLikeResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Post not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     PostsController_findOne: {
         parameters: {
-            query?: never
-            header?: never
+            query?: never;
+            header?: never;
             path: {
                 /** @description Resource UUID */
-                id: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {
-                    [name: string]: unknown
-                }
+                    [name: string]: unknown;
+                };
                 content: {
-                    "application/json": components["schemas"]["PostResponseDto"]
-                }
-            }
+                    "application/json": components["schemas"]["PostResponseDto"];
+                };
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Post not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     PostsController_deleteOwn: {
         parameters: {
-            query?: never
-            header?: never
+            query?: never;
+            header?: never;
             path: {
                 /** @description Resource UUID */
-                id: string
-            }
-            cookie?: never
-        }
-        requestBody?: never
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             204: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Missing or invalid Firebase token */
             401: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Post belongs to another user */
             403: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Post not found */
             404: {
                 headers: {
-                    [name: string]: unknown
-                }
-                content?: never
-            }
-        }
-    }
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }

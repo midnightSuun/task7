@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button"
-import { useToggleLike } from "../api/toggle-like"
 import type { Post } from "@/types"
 
+import { useToggleLike } from "../api/toggle-like"
+
 type Props = {
-    postId: Post["id"],
+    postId: Post["id"]
     likes: Post["likes"]
 }
 
@@ -14,7 +15,11 @@ export const PostLikes = ({ postId, likes }: Props) => {
         toggleLike({ params: { path: { id: postId } } })
     }
 
-    return <>
-        <Button onClick={handleToggleLike}>{likes.likedByMe ? "Unlike" : "Like"} {likes.count}</Button>
-    </>
+    return (
+        <>
+            <Button onClick={handleToggleLike}>
+                {likes.likedByMe ? "Unlike" : "Like"} {likes.count}
+            </Button>
+        </>
+    )
 }

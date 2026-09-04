@@ -1,5 +1,7 @@
-import { api } from "@/api/client"
 import { useQueryClient } from "@tanstack/react-query"
+
+import { api } from "@/api/client"
+
 import { GET_POSTS_QUERY_KEY } from "./get-posts"
 //import { GET_POST_QUERY_KEY } from "./get-post"
 
@@ -13,5 +15,3 @@ export const useToggleLike = () => {
         },
     })
 }
-
-

@@ -1,7 +1,9 @@
-import { Input } from "@/components/ui/input"
-import { useCreatePost } from "../api/create-post"
 import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+import { useCreatePost } from "../api/create-post"
 
 export const CreatePostForm = () => {
     const { mutate: createPost } = useCreatePost()
@@ -14,9 +16,19 @@ export const CreatePostForm = () => {
         createPost({ body: { title, content } })
     }
 
-    return <>
-        <Input onChange={(e) => setTitle(e.target.value)} placeholder="Title"></Input>
-        <Input onChange={(e) => setContent(e.target.value)} placeholder="Content"></Input>
-        <Button onClick={handleCreatePost} disabled={isFormEmpty}>Create Post</Button>
-    </>
+    return (
+        <>
+            <Input
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Title"
+            ></Input>
+            <Input
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Content"
+            ></Input>
+            <Button onClick={handleCreatePost} disabled={isFormEmpty}>
+                Create Post
+            </Button>
+        </>
+    )
 }

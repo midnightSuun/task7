@@ -4,17 +4,17 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarHeader,
-  } from "@/components/ui/sidebar"
-  
-  export function AppSidebar() {
+} from "@/components/ui/sidebar"
+
+export function AppSidebar() {
     return (
-      <Sidebar>
-        <SidebarHeader />
-        <SidebarContent>
-          <SidebarGroup />
-          <SidebarGroup />
-        </SidebarContent>
-        <SidebarFooter />
-      </Sidebar>
+        <Sidebar>
+            <SidebarHeader />
+            <SidebarContent>
+                <SidebarGroup />
+                <SidebarGroup />
+            </SidebarContent>
+            <SidebarFooter />
+        </Sidebar>
     )
-  }
+}
