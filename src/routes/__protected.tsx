@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { Outlet } from "@tanstack/react-router"
 
 import { AuthGuard } from "@/auth/components/auth-guard"
-import { Layout } from "@/components/ui/layout"
+import { Layout } from "@/components/layout"
 
 export const Route = createFileRoute("/__protected")({
     component: RouteComponent,

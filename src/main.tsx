@@ -5,11 +5,14 @@ import { createRoot } from "react-dom/client"
 
 import { QueryProvider } from "@/query"
 import { Router } from "@/router"
+import { ThemeProvider } from "./components/theme-provider"
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <QueryProvider>
-            <Router />
-        </QueryProvider>
+        <ThemeProvider>
+            <QueryProvider>
+                <Router />
+            </QueryProvider>
+        </ThemeProvider>
     </StrictMode>,
 )

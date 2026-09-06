@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/__protected/")({
     component: RouteComponent,
@@ -7,9 +7,7 @@ export const Route = createFileRoute("/__protected/")({
 function RouteComponent() {
 
     return (
-        <div>
-            <Link to="/users">Users</Link>
-            <Link to="/posts">Posts</Link>
-        </div>
+        <>
+        </>
     )
 }
