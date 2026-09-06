@@ -9,8 +9,8 @@ type Props = {
 }
 
 export const UserAvatar = ({ displayName, avatar, className }: Props) => (
-    <Avatar className={cn("h-8 w-8 rounded-lg", className)}>
+    <Avatar className={cn("h-8 w-8 rounded-full", className)}>
         <AvatarImage src={avatar ?? undefined} alt={displayName} />
-        <AvatarFallback className="rounded-lg">{displayName?.charAt(0).toUpperCase()}</AvatarFallback>
+        <AvatarFallback className="rounded-full">{displayName?.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
 )

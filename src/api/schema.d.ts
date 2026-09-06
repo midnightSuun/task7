@@ -210,6 +210,51 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        UserProfileResponseDto: {
+            /**
+             * @description Firebase user id
+             * @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g
+             */
+            id: string;
+            /** @example Jane Doe */
+            displayName: string;
+            /** @example jane@example.com */
+            primaryEmail?: string | null;
+            /** @example http://localhost:9000/avatars/xY7kQp2mN8vR4tLw9sZcAb1dEf3g */
+            avatar?: string | null;
+            /**
+             * Format: date-time
+             * @example 2026-07-24T19:00:00.000Z
+             */
+            createdAt: string;
+            /**
+             * @description Total likes across all of this user's posts
+             * @example 128
+             */
+            likesCount: number;
+            /**
+             * @description Total number of posts
+             * @example 17
+             */
+            postsCount: number;
+            /**
+             * @description Total number of followers
+             * @example 42
+             */
+            followersCount: number;
+            /**
+             * @description Whether the current user follows this user
+             * @example false
+             */
+            isFollowedByMe: boolean;
+        };
+        UploadAvatarDto: {
+            /**
+             * Format: binary
+             * @description Avatar image (jpeg, png, webp, or gif, max 2 MB)
+             */
+            file: string;
+        };
         UserResponseDto: {
             /**
              * @description Firebase user id
@@ -227,13 +272,6 @@ export interface components {
              * @example 2026-07-24T19:00:00.000Z
              */
             createdAt: string;
-        };
-        UploadAvatarDto: {
-            /**
-             * Format: binary
-             * @description Avatar image (jpeg, png, webp, or gif, max 2 MB)
-             */
-            file: string;
         };
         CursorPaginationMetaDto: {
             /** @example 20 */
@@ -395,7 +433,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"];
+                    "application/json": components["schemas"]["UserProfileResponseDto"];
                 };
             };
             /** @description Missing or invalid Firebase token */
@@ -569,7 +607,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["UserResponseDto"];
+                    "application/json": components["schemas"]["UserProfileResponseDto"];
                 };
             };
             /** @description Missing or invalid Firebase token */
