@@ -1,31 +1,30 @@
-import { Link, useRouter } from "@tanstack/react-router"
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 import { usePosts } from "../api/get-posts"
-import { CreatePostForm } from "./create-post-form"
-import { PostLikes } from "./post-likes"
-import { Button } from "@/components/ui/button"
+import { PostCard } from "./post-card"
 
 export const Posts = () => {
-    const { data: posts } = usePosts()
-    const router = useRouter()
+    const {
+        data: postsData,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+    } = usePosts()
 
-    const handleBack = () => {
-        router.history.back()
-    }
+    const loadMoreRef = useIntersectionObserver({
+        enabled: Boolean(hasNextPage) && !isFetchingNextPage,
+        onIntersect: fetchNextPage,
+        rootMargin: "200px",
+    })
+
+    const posts = postsData?.pages.flatMap((page) => page.data) ?? []
 
     return (
-        <>
-            <Button onClick={handleBack}>Back</Button>
-            {posts.data.map((post) => (
-                <div>
-                    <Link to={"/posts/$postId"} params={{ postId: post.id }}>
-                        <h2>{post.title}</h2>
-                    </Link>
-
-                    <PostLikes postId={post.id} likes={post.likes} />
-                </div>
+        <div className="grid gap-4">
+            {posts.map((post) => (
+                <PostCard key={post.id} post={post} />
             ))}
-            <CreatePostForm />
-        </>
+            <div ref={loadMoreRef} />
+        </div>
     )
 }

@@ -49,7 +49,7 @@ const authMiddleware: Middleware = {
     },
 }
 
-const fetchClient = createFetchClient<paths>({
+export const fetchClient = createFetchClient<paths>({
     baseUrl: env.VITE_API_URL,
 })
 
