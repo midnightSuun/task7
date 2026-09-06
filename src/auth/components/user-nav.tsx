@@ -4,11 +4,6 @@ import {
 } from "lucide-react"
 
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -25,6 +20,7 @@ import {
 import { useMe } from "../get-me"
 import { Link } from "@tanstack/react-router"
 import { useLogout } from "../logout"
+import { UserAvatar } from "../../users/ui/user-avatar"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
@@ -42,10 +38,7 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar ?? undefined} alt={user.displayName} />
-                <AvatarFallback className="rounded-lg">{user.displayName?.charAt(0).toUpperCase()}</AvatarFallback>
-              </Avatar>
+              <UserAvatar displayName={user.displayName} avatar={user.avatar} />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.displayName}</span>
                 {user.primaryEmail && <span className="truncate text-xs">{user.primaryEmail}</span>}

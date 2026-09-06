@@ -1,25 +1,14 @@
-import { Link } from "@tanstack/react-router"
-
 import { useUsers } from "../api/get-users"
-import { Button } from "@/components/ui/button"
-import { useRouter } from "@tanstack/react-router"
+import { UserCard } from "./user-card"
 
 export const UsersList = () => {
     const { data: users } = useUsers()
-    const router = useRouter()
-
-    const handleBack = () => {
-        router.history.back()
-    }
 
     return (
-        <>
-            <Button onClick={handleBack}>Back</Button>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {users.data.map((user) => (
-                <Link to={"/users/$userId"} params={{ userId: user.id }}>
-                    {user.displayName}
-                </Link>
+                <UserCard key={user.id} user={user} />
             ))}
-        </>
+        </div>
     )
 }
