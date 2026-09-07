@@ -17,6 +17,7 @@ import { Route as _protectedPostsIndexRouteImport } from './routes/__protected/p
 import { Route as _protectedPostsPostIdRouteImport } from './routes/__protected/posts/$postId'
 import { Route as _protectedUsersIndexRouteImport } from './routes/__protected/users/index'
 import { Route as _protectedUsersUserIdRouteImport } from './routes/__protected/users/$userId'
+import { Route as _protectedUsersUserIdEditRouteImport } from './routes/__protected/users/$userId_.edit'
 
 const _protectedRoute = _protectedRouteImport.update({
   id: '/__protected',
@@ -56,6 +57,12 @@ const _protectedUsersUserIdRoute = _protectedUsersUserIdRouteImport.update({
   path: '/users/$userId',
   getParentRoute: () => _protectedRoute,
 } as any)
+const _protectedUsersUserIdEditRoute =
+  _protectedUsersUserIdEditRouteImport.update({
+    id: '/users/$userId_/edit',
+    path: '/users/$userId/edit',
+    getParentRoute: () => _protectedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof _protectedIndexRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/users/$userId': typeof _protectedUsersUserIdRoute
   '/posts/': typeof _protectedPostsIndexRoute
   '/users/': typeof _protectedUsersIndexRoute
+  '/users/$userId/edit': typeof _protectedUsersUserIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof _protectedIndexRoute
@@ -72,6 +80,7 @@ export interface FileRoutesByTo {
   '/users/$userId': typeof _protectedUsersUserIdRoute
   '/posts': typeof _protectedPostsIndexRoute
   '/users': typeof _protectedUsersIndexRoute
+  '/users/$userId/edit': typeof _protectedUsersUserIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -83,6 +92,7 @@ export interface FileRoutesById {
   '/__protected/users/$userId': typeof _protectedUsersUserIdRoute
   '/__protected/posts/': typeof _protectedPostsIndexRoute
   '/__protected/users/': typeof _protectedUsersIndexRoute
+  '/__protected/users/$userId_/edit': typeof _protectedUsersUserIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -93,9 +103,16 @@ export interface FileRouteTypes {
     | '/users/$userId'
     | '/posts/'
     | '/users/'
+    | '/users/$userId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/sign-in' | '/posts/$postId' | '/users/$userId' | '/posts' | '/users'
+    | '/'
+    | '/sign-in'
+    | '/posts/$postId'
+    | '/users/$userId'
+    | '/posts'
+    | '/users'
+    | '/users/$userId/edit'
   id:
     | '__root__'
     | '/__protected'
@@ -106,6 +123,7 @@ export interface FileRouteTypes {
     | '/__protected/users/$userId'
     | '/__protected/posts/'
     | '/__protected/users/'
+    | '/__protected/users/$userId_/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof _protectedUsersUserIdRouteImport
       parentRoute: typeof _protectedRoute
     }
+    '/__protected/users/$userId_/edit': {
+      id: '/__protected/users/$userId_/edit'
+      path: '/users/$userId/edit'
+      fullPath: '/users/$userId/edit'
+      preLoaderRoute: typeof _protectedUsersUserIdEditRouteImport
+      parentRoute: typeof _protectedRoute
+    }
   }
 }
 
@@ -180,6 +205,7 @@ interface _protectedRouteChildren {
   _protectedUsersUserIdRoute: typeof _protectedUsersUserIdRoute
   _protectedPostsIndexRoute: typeof _protectedPostsIndexRoute
   _protectedUsersIndexRoute: typeof _protectedUsersIndexRoute
+  _protectedUsersUserIdEditRoute: typeof _protectedUsersUserIdEditRoute
 }
 
 const _protectedRouteChildren: _protectedRouteChildren = {
@@ -188,6 +214,7 @@ const _protectedRouteChildren: _protectedRouteChildren = {
   _protectedUsersUserIdRoute: _protectedUsersUserIdRoute,
   _protectedPostsIndexRoute: _protectedPostsIndexRoute,
   _protectedUsersIndexRoute: _protectedUsersIndexRoute,
+  _protectedUsersUserIdEditRoute: _protectedUsersUserIdEditRoute,
 }
 
 const _protectedRouteWithChildren = _protectedRoute._addFileChildren(

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useUser } from "../api/get-user"
 import { UserAvatar } from "./user-avatar"
 import { UserProfileCard } from "./user-profile-card"
+import { FollowButton } from "./follow-button"
 
 const route = getRouteApi("/__protected/users/$userId")
 
@@ -19,20 +20,24 @@ export const UserProfile = () => {
 
   return (
     <div className="grid gap-6">
-      <div>
+      <div className="flex flex-col items-center gap-6">
         <h1>{user.displayName}</h1>
         <UserAvatar
           displayName={user.displayName}
           avatar={user.avatar}
-          className="h-40 w-40"
+          className="h-40 w-40 text-xl"
         />
 
         {isMe && (
-          <Button variant="outline" render={<Link to="/" />}>
+          <Button variant="outline" render={<Link to="/users/$userId/edit" params={{ userId }} />}>
             <PencilIcon className="h-4 w-4" />
             Edit Profile
           </Button>
         )}
+        {
+          !isMe &&
+          <FollowButton userId={userId} isFollowing={user.isFollowedByMe} />
+        }
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -40,6 +45,11 @@ export const UserProfile = () => {
         <UserProfileCard label="Posts" value={user.postsCount} />
         <UserProfileCard label="Likes" value={user.likesCount} />
       </div>
+
+      <div>
+        {/* Posts list */}
+      </div>
+
     </div>
   )
 }
