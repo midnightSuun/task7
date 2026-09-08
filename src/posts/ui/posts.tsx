@@ -22,7 +22,7 @@ export const Posts = () => {
     return (
         <div className="grid gap-4">
             {posts.map((post) => (
-                <PostCard key={post.id} post={post} />
+                <PostCard key={post.id} post={post}/>
             ))}
             <div ref={loadMoreRef} />
         </div>

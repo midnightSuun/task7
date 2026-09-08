@@ -17,6 +17,8 @@ import {
 import { useUser } from "../api/get-user"
 import { UserAvatar } from "./user-avatar"
 import { useUploadAvatar } from "../api/upload-avatar"
+import { Input } from "@/components/ui/input"
+import { useUpdateProfile } from "../api/update-profile"
 
 const route = getRouteApi("/__protected/users/$userId_/edit")
 
@@ -27,8 +29,18 @@ export const UserProfileEdit = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const { mutateAsync: uploadAvatar } = useUploadAvatar()
+  const [displayName, setDisplayName] = useState(user.displayName)
+  const { mutateAsync: updateProfile } = useUpdateProfile()
 
   const isMe = me?.id === user.id
+
+  const handleSave = async () => {
+    await updateProfile({
+      body: {
+        displayName,
+      },
+    })
+  }
 
   const handleChangePhoto = () => {
     fileInputRef.current?.click()
@@ -42,6 +54,7 @@ export const UserProfileEdit = () => {
     formData.append("file", file)
 
     await uploadAvatar(
+    // @ts-ignore formData is not typed
       { body: formData },
     )
 
@@ -103,6 +116,9 @@ export const UserProfileEdit = () => {
         tabIndex={-1}
         onChange={handleFileChange}
       />
+
+      <Input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} />
+      <Button type="button" onClick={handleSave}>Save</Button>
     </div>
   )
 }

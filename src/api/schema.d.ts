@@ -13,7 +13,8 @@ export interface paths {
         };
         /** Get the currently authenticated user */
         get: operations["UsersController_getMe"];
-        put?: never;
+        /** Update the current user profile */
+        put: operations["UsersController_updateMe"];
         post?: never;
         delete?: never;
         options?: never;
@@ -248,12 +249,9 @@ export interface components {
              */
             isFollowedByMe: boolean;
         };
-        UploadAvatarDto: {
-            /**
-             * Format: binary
-             * @description Avatar image (jpeg, png, webp, or gif, max 2 MB)
-             */
-            file: string;
+        UpdateProfileDto: {
+            /** @example Jane Doe */
+            displayName: string;
         };
         UserResponseDto: {
             /**
@@ -272,6 +270,13 @@ export interface components {
              * @example 2026-07-24T19:00:00.000Z
              */
             createdAt: string;
+        };
+        UploadAvatarDto: {
+            /**
+             * Format: binary
+             * @description Avatar image (jpeg, png, webp, or gif, max 2 MB)
+             */
+            file: string;
         };
         CursorPaginationMetaDto: {
             /** @example 20 */
@@ -390,6 +395,7 @@ export interface components {
             content: string;
             /** @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g */
             authorId: string;
+            author: components["schemas"]["UserResponseDto"];
             /**
              * Format: date-time
              * @example 2026-08-29T00:00:00.000Z
@@ -435,6 +441,43 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["UserProfileResponseDto"];
                 };
+            };
+            /** @description Missing or invalid Firebase token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UsersController_updateMe: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateProfileDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserResponseDto"];
+                };
+            };
+            /** @description Invalid display name */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Missing or invalid Firebase token */
             401: {
