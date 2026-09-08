@@ -1,34 +1,41 @@
-import { useState } from "react"
+import { z } from "zod"
 
+import { Form, FormInput } from "@/components/form"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
 import { useCreatePost } from "../api/create-post"
 
+const schema = z.object({
+    title: z.string().min(1, "Title is required"),
+    content: z.string().min(1, "Content is required"),
+})
+
+type FormData = z.infer<typeof schema>
+
+const defaultValues: FormData = {
+    title: "",
+    content: "",
+}
+
 export const CreatePostForm = () => {
-    const { mutate: createPost } = useCreatePost()
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
+    const { mutateAsync: createPost, isPending } = useCreatePost()
 
-    const isFormEmpty = !title.trim() || !content.trim()
-
-    const handleCreatePost = () => {
-        createPost({ body: { title, content } })
+    const handleSubmit = async (data: FormData) => {
+        await createPost({ body: data })
     }
 
     return (
-        <>
-            <Input
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Title"
-            ></Input>
-            <Input
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Content"
-            ></Input>
-            <Button onClick={handleCreatePost} disabled={isFormEmpty}>
+        <Form
+            className="grid gap-3"
+            onSubmit={handleSubmit}
+            validationSchema={schema}
+            defaultValues={defaultValues}
+        >
+            <FormInput name="title" placeholder="Title" />
+            <FormInput name="content" placeholder="Content" />
+            <Button type="submit" disabled={isPending}>
                 Create Post
             </Button>
-        </>
+        </Form>
     )
 }

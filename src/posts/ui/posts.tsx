@@ -2,6 +2,7 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 import { usePosts } from "../api/get-posts"
 import { PostCard } from "./post-card"
+import { CreatePostForm } from "./create-post-form"
 
 export const Posts = () => {
     const {
@@ -21,6 +22,7 @@ export const Posts = () => {
 
     return (
         <div className="grid gap-4">
+            <CreatePostForm />
             {posts.map((post) => (
                 <PostCard key={post.id} post={post}/>
             ))}
