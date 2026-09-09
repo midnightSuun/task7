@@ -21,6 +21,7 @@ import { useUser } from "../api/get-user"
 import { useUpdateProfile } from "../api/update-profile"
 import { useUploadAvatar } from "../api/upload-avatar"
 import { UserAvatar } from "./user-avatar"
+import { useDeleteAvatar } from "../api/delete-avatar"
 
 const route = getRouteApi("/__protected/users/$userId_/edit")
 
@@ -38,6 +39,7 @@ export const UserProfileEdit = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const { mutateAsync: uploadAvatar } = useUploadAvatar()
   const { mutateAsync: updateProfile } = useUpdateProfile()
+  const { mutateAsync: deleteAvatar } = useDeleteAvatar()
 
   const isMe = me?.id === user.id
 
@@ -66,6 +68,11 @@ export const UserProfileEdit = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
+  }
+
+  const handleDeleteAvatar = async () => {
+    await deleteAvatar()
+    setIsSheetOpen(false)
   }
 
   if (!isMe) return null
@@ -107,6 +114,7 @@ export const UserProfileEdit = () => {
               <CameraIcon />
               Change photo
             </Button>
+            <Button variant="destructive" onClick={handleDeleteAvatar}>Remove current photo</Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>

@@ -1,4 +1,4 @@
-import { getRouteApi, Link } from "@tanstack/react-router"
+import { getRouteApi, Link, useNavigate } from "@tanstack/react-router"
 
 import {
     Card,
@@ -11,12 +11,25 @@ import { format } from "date-fns"
 
 import { usePost } from "../api/get-post"
 import { PostLikes } from "./post-likes"
+import { Button } from "@/components/ui/button"
+import { useDeletePost } from "../api/delete-post"
+import { useMe } from "@/auth/get-me"
 
 const route = getRouteApi("/__protected/posts/$postId")
 
 export const PostDetail = () => {
     const { postId } = route.useParams()
     const { data: post } = usePost(postId)
+    const { mutateAsync: deletePost } = useDeletePost()
+    const navigate = useNavigate()
+    const { data: me } = useMe()
+
+    const handleDeletePost = async () => {
+        navigate({to: "/posts"})
+        await deletePost({params: {path: {id: post.id}}})
+    }
+
+    const isMyPost = me?.id === post.authorId
 
     return (
         <article className="mx-auto w-full max-w-2xl">
@@ -51,8 +64,10 @@ export const PostDetail = () => {
                         {post.content}
                     </p>
                 </CardContent>
-                <CardFooter className="border-t">
+                <CardFooter className="border-t flex items-center justify-between">
                     <PostLikes postId={post.id} likes={post.likes} authorId={post.authorId} />
+
+                    {isMyPost && <Button variant="destructive" onClick={handleDeletePost}>Delete</Button>}
                 </CardFooter>
             </Card>
         </article>
