@@ -30,7 +30,7 @@ export const PostCard = ({ post }: Props) => (
                     {post.content}
                 </p>
             </Link>
-            <PostLikes postId={post.id} likes={post.likes} />
+            <PostLikes postId={post.id} authorId={post.authorId} likes={post.likes} />
         </CardContent>
     </Card>
 )

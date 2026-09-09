@@ -52,7 +52,7 @@ export const PostDetail = () => {
                     </p>
                 </CardContent>
                 <CardFooter className="border-t">
-                    <PostLikes postId={post.id} likes={post.likes} />
+                    <PostLikes postId={post.id} likes={post.likes} authorId={post.authorId} />
                 </CardFooter>
             </Card>
         </article>

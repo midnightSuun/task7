@@ -9,18 +9,19 @@ import { useToggleLike } from "../api/toggle-like"
 
 type Props = {
     postId: Post["id"]
+    authorId: Post["authorId"]
     likes: Post["likes"]
 }
 
 const MAX_VISIBLE_LIKERS = 3
 
-export const PostLikes = ({ postId, likes }: Props) => {
+export const PostLikes = ({ postId, authorId, likes }: Props) => {
     const { mutate: toggleLike, isPending } = useToggleLike()
     const { likedByMe, count, users } = likes
     const visibleLikers = users.slice(0, MAX_VISIBLE_LIKERS)
 
     const handleToggleLike = () => {
-        toggleLike({ params: { path: { id: postId } } })
+        toggleLike({ postId, authorId })
     }
 
     return (

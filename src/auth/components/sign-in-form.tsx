@@ -1,31 +1,46 @@
-import { useState } from "react"
+import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
-import { useSignInWithCredentials } from "../sign-in-with-credentials"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { Form, FormInput } from "@/components/form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field"
-import { useSignInWithGoogle } from "../sign-in-with-google"
 import { useNavigate } from "@tanstack/react-router"
+import { useSignInWithCredentials } from "../sign-in-with-credentials"
+import { useSignInWithGoogle } from "../sign-in-with-google"
+import { useId } from "react"
+import { FormButton } from "@/components/form/form-button"
+
+const schema = z.object({
+    email: z.email("Invalid email address"),
+    password: z.string().min(1, "Password is required"),
+})
+
+type FormData = z.infer<typeof schema>
+
+const defaultValues: FormData = {
+    email: "",
+    password: "",
+}
+
+const SignInInput = FormInput<FormData>
 
 export const SignInForm = () => {
-    const { mutateAsync } = useSignInWithCredentials()
+    const { mutateAsync: signInWithCredentials } = useSignInWithCredentials()
     const navigate = useNavigate()
-    const [email, setEmail] = useState("")
     const { mutateAsync: signInWithGoogle } = useSignInWithGoogle()
-    const [password, setPassword] = useState("")
 
-    const handleSignIn = async () => {
-        await mutateAsync({
-            email,
-            password,
-        })
-    }
     const handleSignInWithGoogle = async () => {
         await signInWithGoogle()
         navigate({ to: "/" })
     }
+
+    const handleSignInWithCredentials = async (data: FormData) => {
+        await signInWithCredentials(data)
+    }
+
+    const passwordInputId = useId()
+    const emailInputId = useId()
 
     return (
         <div className={"flex flex-col gap-6"}>
@@ -52,32 +67,29 @@ export const SignInForm = () => {
                         <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                             Or continue with
                         </FieldSeparator>
+                        <Form onSubmit={handleSignInWithCredentials} validationSchema={schema} defaultValues={defaultValues} className="flex flex-col items-center gap-4">
                         <Field>
-                            <FieldLabel htmlFor="email">Email</FieldLabel>
-                            <Input
-                                id="email"
+                            <FieldLabel htmlFor={emailInputId}>Email</FieldLabel>
+                            <FormInput
+                                id={emailInputId}
                                 type="email"
                                 placeholder="Enter your email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                name="email"
                             />
                         </Field>
-
                         <Field>
-                            <FieldLabel htmlFor="password">Password</FieldLabel>
-                            <Input
-                                id="password"
+                            <FieldLabel htmlFor={passwordInputId}>Password</FieldLabel>
+                            <SignInInput
+                                id={passwordInputId}
                                 type="password"
                                 placeholder="Enter your password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
                             />
                         </Field>
                         <Field>
-                            <Button type="submit" onClick={handleSignIn}>Login</Button>
+                            <FormButton>Login</FormButton>
                         </Field>
+                        </Form>
                     </FieldGroup>
                 </CardContent>
             </Card>

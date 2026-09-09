@@ -1,13 +1,13 @@
 import type { ComponentProps } from "react"
 import { Input } from "@/components/ui/input"
 import { useFormContext } from "react-hook-form";
+import type { FormData } from "./form";
 
-
-type Props = ComponentProps<typeof Input> & {
-    name: string;
+type Props<T extends FormData> = ComponentProps<typeof Input> & {
+    name: keyof T;
 };
 
-export const FormInput = ({ name, ...props }: Props) => {
+export const FormInput = <T extends FormData>({ name, ...props }: Props<T>) => {
     const {
         register,
         formState: { errors },

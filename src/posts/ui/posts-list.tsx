@@ -1,16 +1,20 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
+import type { Post } from "@/types"
 import { usePosts } from "../api/get-posts"
 import { PostCard } from "./post-card"
-import { CreatePostForm } from "./create-post-form"
 
-export const Posts = () => {
+type Props = {
+    authorId?: Post["authorId"]
+}
+
+export const PostsList = ({ authorId }: Props) => {
     const {
         data: postsData,
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
-    } = usePosts()
+    } = usePosts(authorId)
 
     const loadMoreRef = useIntersectionObserver({
         enabled: Boolean(hasNextPage) && !isFetchingNextPage,
@@ -22,7 +26,6 @@ export const Posts = () => {
 
     return (
         <div className="grid gap-4">
-            <CreatePostForm />
             {posts.map((post) => (
                 <PostCard key={post.id} post={post}/>
             ))}

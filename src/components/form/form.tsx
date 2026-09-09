@@ -11,7 +11,6 @@ import {
 } from "react-hook-form";
 import type { ZodType } from "zod";
 
-
 export type FormData = FieldValues;
 
 export type FormHandle<T extends FormData> = {

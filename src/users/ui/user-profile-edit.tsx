@@ -14,13 +14,21 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
+import { Form, FormInput } from "@/components/form"
+import { FormButton } from "@/components/form/form-button"
+import { z } from "zod"
 import { useUser } from "../api/get-user"
-import { UserAvatar } from "./user-avatar"
-import { useUploadAvatar } from "../api/upload-avatar"
-import { Input } from "@/components/ui/input"
 import { useUpdateProfile } from "../api/update-profile"
+import { useUploadAvatar } from "../api/upload-avatar"
+import { UserAvatar } from "./user-avatar"
 
 const route = getRouteApi("/__protected/users/$userId_/edit")
+
+const schema = z.object({
+  displayName: z.string().min(1, "Display name is required"),
+})
+
+type FormData = z.infer<typeof schema>
 
 export const UserProfileEdit = () => {
   const { userId } = route.useParams()
@@ -29,17 +37,12 @@ export const UserProfileEdit = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const { mutateAsync: uploadAvatar } = useUploadAvatar()
-  const [displayName, setDisplayName] = useState(user.displayName)
   const { mutateAsync: updateProfile } = useUpdateProfile()
 
   const isMe = me?.id === user.id
 
-  const handleSave = async () => {
-    await updateProfile({
-      body: {
-        displayName,
-      },
-    })
+  const handleSave = async (data: FormData) => {
+    await updateProfile({ body: data })
   }
 
   const handleChangePhoto = () => {
@@ -54,7 +57,7 @@ export const UserProfileEdit = () => {
     formData.append("file", file)
 
     await uploadAvatar(
-    // @ts-ignore formData is not typed
+      // @ts-ignore formData is not typed
       { body: formData },
     )
 
@@ -109,16 +112,18 @@ export const UserProfileEdit = () => {
       </Sheet>
 
       <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        className="sr-only"
-        tabIndex={-1}
-        onChange={handleFileChange}
-      />
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="sr-only"
+          tabIndex={-1}
+          onChange={handleFileChange}
+        />
 
-      <Input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} />
-      <Button type="button" onClick={handleSave}>Save</Button>
+      <Form onSubmit={handleSave} validationSchema={schema} defaultValues={{ displayName: user.displayName }} className="flex flex-col items-center gap-2">
+        <FormInput<FormData> name="displayName" type="text" placeholder="Enter your new username" />
+        <FormButton>Save</FormButton>
+      </Form>
     </div>
   )
 }

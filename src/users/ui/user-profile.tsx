@@ -5,9 +5,10 @@ import { useMe } from "@/auth/get-me"
 import { Button } from "@/components/ui/button"
 
 import { useUser } from "../api/get-user"
+import { FollowButton } from "./follow-button"
 import { UserAvatar } from "./user-avatar"
 import { UserProfileCard } from "./user-profile-card"
-import { FollowButton } from "./follow-button"
+import { PostsList } from "@/posts/ui/posts-list"
 
 const route = getRouteApi("/__protected/users/$userId")
 
@@ -47,7 +48,7 @@ export const UserProfile = () => {
       </div>
 
       <div>
-        {/* Posts list */}
+        <PostsList authorId={userId} />
       </div>
 
     </div>
