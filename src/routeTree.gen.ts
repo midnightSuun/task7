@@ -13,6 +13,8 @@ import { Route as _protectedRouteImport } from './routes/__protected'
 import { Route as _publicRouteImport } from './routes/__public'
 import { Route as _protectedIndexRouteImport } from './routes/__protected/index'
 import { Route as _publicSignInRouteImport } from './routes/__public/sign-in'
+import { Route as _protectedChatsIndexRouteImport } from './routes/__protected/chats/index'
+import { Route as _protectedChatsChatIdRouteImport } from './routes/__protected/chats/$chatId'
 import { Route as _protectedPostsIndexRouteImport } from './routes/__protected/posts/index'
 import { Route as _protectedPostsPostIdRouteImport } from './routes/__protected/posts/$postId'
 import { Route as _protectedUsersIndexRouteImport } from './routes/__protected/users/index'
@@ -36,6 +38,16 @@ const _publicSignInRoute = _publicSignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
   getParentRoute: () => _publicRoute,
+} as any)
+const _protectedChatsIndexRoute = _protectedChatsIndexRouteImport.update({
+  id: '/chats/',
+  path: '/chats/',
+  getParentRoute: () => _protectedRoute,
+} as any)
+const _protectedChatsChatIdRoute = _protectedChatsChatIdRouteImport.update({
+  id: '/chats/$chatId',
+  path: '/chats/$chatId',
+  getParentRoute: () => _protectedRoute,
 } as any)
 const _protectedPostsIndexRoute = _protectedPostsIndexRouteImport.update({
   id: '/posts/',
@@ -67,8 +79,10 @@ const _protectedUsersUserIdEditRoute =
 export interface FileRoutesByFullPath {
   '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
+  '/chats/$chatId': typeof _protectedChatsChatIdRoute
   '/posts/$postId': typeof _protectedPostsPostIdRoute
   '/users/$userId': typeof _protectedUsersUserIdRoute
+  '/chats/': typeof _protectedChatsIndexRoute
   '/posts/': typeof _protectedPostsIndexRoute
   '/users/': typeof _protectedUsersIndexRoute
   '/users/$userId/edit': typeof _protectedUsersUserIdEditRoute
@@ -76,8 +90,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof _protectedIndexRoute
   '/sign-in': typeof _publicSignInRoute
+  '/chats/$chatId': typeof _protectedChatsChatIdRoute
   '/posts/$postId': typeof _protectedPostsPostIdRoute
   '/users/$userId': typeof _protectedUsersUserIdRoute
+  '/chats': typeof _protectedChatsIndexRoute
   '/posts': typeof _protectedPostsIndexRoute
   '/users': typeof _protectedUsersIndexRoute
   '/users/$userId/edit': typeof _protectedUsersUserIdEditRoute
@@ -88,8 +104,10 @@ export interface FileRoutesById {
   '/__public': typeof _publicRouteWithChildren
   '/__public/sign-in': typeof _publicSignInRoute
   '/__protected/': typeof _protectedIndexRoute
+  '/__protected/chats/$chatId': typeof _protectedChatsChatIdRoute
   '/__protected/posts/$postId': typeof _protectedPostsPostIdRoute
   '/__protected/users/$userId': typeof _protectedUsersUserIdRoute
+  '/__protected/chats/': typeof _protectedChatsIndexRoute
   '/__protected/posts/': typeof _protectedPostsIndexRoute
   '/__protected/users/': typeof _protectedUsersIndexRoute
   '/__protected/users/$userId_/edit': typeof _protectedUsersUserIdEditRoute
@@ -99,8 +117,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/sign-in'
+    | '/chats/$chatId'
     | '/posts/$postId'
     | '/users/$userId'
+    | '/chats/'
     | '/posts/'
     | '/users/'
     | '/users/$userId/edit'
@@ -108,8 +128,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/sign-in'
+    | '/chats/$chatId'
     | '/posts/$postId'
     | '/users/$userId'
+    | '/chats'
     | '/posts'
     | '/users'
     | '/users/$userId/edit'
@@ -119,8 +141,10 @@ export interface FileRouteTypes {
     | '/__public'
     | '/__public/sign-in'
     | '/__protected/'
+    | '/__protected/chats/$chatId'
     | '/__protected/posts/$postId'
     | '/__protected/users/$userId'
+    | '/__protected/chats/'
     | '/__protected/posts/'
     | '/__protected/users/'
     | '/__protected/users/$userId_/edit'
@@ -160,6 +184,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-in'
       preLoaderRoute: typeof _publicSignInRouteImport
       parentRoute: typeof _publicRoute
+    }
+    '/__protected/chats/': {
+      id: '/__protected/chats/'
+      path: '/chats'
+      fullPath: '/chats/'
+      preLoaderRoute: typeof _protectedChatsIndexRouteImport
+      parentRoute: typeof _protectedRoute
+    }
+    '/__protected/chats/$chatId': {
+      id: '/__protected/chats/$chatId'
+      path: '/chats/$chatId'
+      fullPath: '/chats/$chatId'
+      preLoaderRoute: typeof _protectedChatsChatIdRouteImport
+      parentRoute: typeof _protectedRoute
     }
     '/__protected/posts/': {
       id: '/__protected/posts/'
@@ -201,8 +239,10 @@ declare module '@tanstack/react-router' {
 
 interface _protectedRouteChildren {
   _protectedIndexRoute: typeof _protectedIndexRoute
+  _protectedChatsChatIdRoute: typeof _protectedChatsChatIdRoute
   _protectedPostsPostIdRoute: typeof _protectedPostsPostIdRoute
   _protectedUsersUserIdRoute: typeof _protectedUsersUserIdRoute
+  _protectedChatsIndexRoute: typeof _protectedChatsIndexRoute
   _protectedPostsIndexRoute: typeof _protectedPostsIndexRoute
   _protectedUsersIndexRoute: typeof _protectedUsersIndexRoute
   _protectedUsersUserIdEditRoute: typeof _protectedUsersUserIdEditRoute
@@ -210,8 +250,10 @@ interface _protectedRouteChildren {
 
 const _protectedRouteChildren: _protectedRouteChildren = {
   _protectedIndexRoute: _protectedIndexRoute,
+  _protectedChatsChatIdRoute: _protectedChatsChatIdRoute,
   _protectedPostsPostIdRoute: _protectedPostsPostIdRoute,
   _protectedUsersUserIdRoute: _protectedUsersUserIdRoute,
+  _protectedChatsIndexRoute: _protectedChatsIndexRoute,
   _protectedPostsIndexRoute: _protectedPostsIndexRoute,
   _protectedUsersIndexRoute: _protectedUsersIndexRoute,
   _protectedUsersUserIdEditRoute: _protectedUsersUserIdEditRoute,

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "@/auth/components/user-nav"
 import { Link, useMatchRoute } from "@tanstack/react-router"
-import { FileIcon, UserIcon } from "lucide-react"
+import { FileIcon, MessageSquareIcon, UserIcon } from "lucide-react"
 
 const sidebarItems = [
     {
@@ -23,6 +23,11 @@ const sidebarItems = [
         icon: <FileIcon />,
         to: "/posts",
     },
+    {
+        label: "Chats",
+        icon: <MessageSquareIcon />,
+        to: "/chats",
+    }
 ] as const
 
 export function AppSidebar() {

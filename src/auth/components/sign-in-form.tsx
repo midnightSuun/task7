@@ -68,27 +68,27 @@ export const SignInForm = () => {
                             Or continue with
                         </FieldSeparator>
                         <Form onSubmit={handleSignInWithCredentials} validationSchema={schema} defaultValues={defaultValues} className="flex flex-col items-center gap-4">
-                        <Field>
-                            <FieldLabel htmlFor={emailInputId}>Email</FieldLabel>
-                            <FormInput
-                                id={emailInputId}
-                                type="email"
-                                placeholder="Enter your email"
-                                name="email"
-                            />
-                        </Field>
-                        <Field>
-                            <FieldLabel htmlFor={passwordInputId}>Password</FieldLabel>
-                            <SignInInput
-                                id={passwordInputId}
-                                type="password"
-                                placeholder="Enter your password"
-                                name="password"
-                            />
-                        </Field>
-                        <Field>
-                            <FormButton>Login</FormButton>
-                        </Field>
+                            <Field>
+                                <FieldLabel htmlFor={emailInputId}>Email</FieldLabel>
+                                <FormInput
+                                    id={emailInputId}
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    name="email"
+                                />
+                            </Field>
+                            <Field>
+                                <FieldLabel htmlFor={passwordInputId}>Password</FieldLabel>
+                                <SignInInput
+                                    id={passwordInputId}
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    name="password"
+                                />
+                            </Field>
+                            <Field>
+                                <FormButton>Login</FormButton>
+                            </Field>
                         </Form>
                     </FieldGroup>
                 </CardContent>

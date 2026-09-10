@@ -64,7 +64,7 @@ export const PostDetail = () => {
                         {post.content}
                     </p>
                 </CardContent>
-                <CardFooter className="border-t flex items-center justify-between">
+                <CardFooter className="flex items-center justify-between">
                     <PostLikes postId={post.id} likes={post.likes} authorId={post.authorId} />
 
                     {isMyPost && <Button variant="destructive" onClick={handleDeletePost}>Delete</Button>}

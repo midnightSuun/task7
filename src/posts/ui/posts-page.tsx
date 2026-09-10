@@ -4,7 +4,9 @@ import { PostsList } from "./posts-list"
 export const PostsPage = () => {
     return (
         <div>
-            <CreatePostForm />
+            <div className="mb-4">
+                <CreatePostForm />
+            </div>
             <PostsList />
         </div>
     )
