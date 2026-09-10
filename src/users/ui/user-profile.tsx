@@ -1,5 +1,5 @@
 import { getRouteApi, Link } from "@tanstack/react-router"
-import { PencilIcon } from "lucide-react"
+import { MessageCircleIcon, PencilIcon } from "lucide-react"
 
 import { useMe } from "@/auth/get-me"
 import { Button } from "@/components/ui/button"
@@ -38,6 +38,14 @@ export const UserProfile = () => {
         {
           !isMe &&
           <FollowButton userId={userId} isFollowing={user.isFollowedByMe} />
+          
+        }
+        {
+          !isMe &&
+          <Button variant="outline" render={<Link to="/chats/$chatId" params={{ chatId: user.id }} />}>
+            <MessageCircleIcon className="h-4 w-4" />
+            Message
+          </Button>
         }
       </div>
 

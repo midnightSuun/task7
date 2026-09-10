@@ -19,5 +19,5 @@ export const useGetMessages = (conversationId: string) =>
         path: "/api/conversations/{conversationId}/messages",
         queryKey: GET_MESSAGES_QUERY_KEY(conversationId),
         pageSize: MESSAGES_PAGE_SIZE,
-        query: { conversationId },
+        pathParams: { conversationId },
     })

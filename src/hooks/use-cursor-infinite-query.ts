@@ -37,6 +37,15 @@ type GetQuery<Path extends CursorPaginatedPath> =
     ? Query
     : never
 
+type GetPathParams<Path extends CursorPaginatedPath> = Exclude<
+  NonNullable<paths[Path]["get"]> extends {
+    parameters: { path?: infer PathParams }
+  }
+    ? PathParams
+    : never,
+  undefined
+>
+
 type ExtraQuery<Path extends CursorPaginatedPath> = Omit<
   NonNullable<GetQuery<Path>>,
   "limit" | "cursor"
@@ -46,12 +55,18 @@ type CursorPage<Path extends CursorPaginatedPath> = JsonSuccess<Path> & {
   meta: { hasMore: boolean; nextCursor?: string | null }
 }
 
+type PathParamsOptions<Path extends CursorPaginatedPath> = [
+  GetPathParams<Path>,
+] extends [never]
+  ? { pathParams?: never }
+  : { pathParams: GetPathParams<Path> }
+
 type UseCursorInfiniteQueryOptions<Path extends CursorPaginatedPath> = {
   path: Path
   queryKey: QueryKey
   pageSize?: number
   query?: ExtraQuery<Path>
-}
+} & PathParamsOptions<Path>
 
 const DEFAULT_PAGE_SIZE = 10
 
@@ -60,13 +75,15 @@ export const useCursorInfiniteQuery = <Path extends CursorPaginatedPath>({
   queryKey,
   pageSize = DEFAULT_PAGE_SIZE,
   query,
+  pathParams,
 }: UseCursorInfiniteQueryOptions<Path>) =>
   useInfiniteQuery({
-    queryKey: [...queryKey, path, pageSize, query],
+    queryKey: [...queryKey, path, pageSize, query, pathParams],
     initialPageParam: undefined as string | undefined,
     queryFn: async ({ pageParam, signal }) => {
       const { data, error } = await fetchClient.GET(path, {
         params: {
+          path: pathParams,
           query: {
             ...query,
             limit: pageSize,

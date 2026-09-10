@@ -1,8 +1,9 @@
-export const ChatsPage = () => {
+import { ChatsList } from "./chats-list"
 
+export const ChatsPage = () => {
     return (
         <div>
-            Chats
+            <ChatsList />
         </div>
     )
 }

@@ -6,7 +6,7 @@ export const GET_CONVERSATIONS_QUERY_KEY = api.queryOptions(
     "/api/conversations",
 ).queryKey
 
-const CONVERSATIONS_PAGE_SIZE = 10
+const CONVERSATIONS_PAGE_SIZE = 20
 
 export const useGetConversations = () => 
     useCursorInfiniteQuery({
