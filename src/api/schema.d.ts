@@ -127,6 +127,30 @@ export interface paths {
          */
         get: operations["ConversationsController_findAll"];
         put?: never;
+        /**
+         * Create a 1:1 conversation
+         * @description Creates a DM with the given recipient, or returns the existing thread if one already exists.
+         */
+        post: operations["ConversationsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/conversations/{conversationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a conversation by id
+         * @description Returns a 1:1 thread the current user belongs to, including the last message and the other participant.
+         */
+        get: operations["ConversationsController_findOne"];
+        put?: never;
         post?: never;
         delete?: never;
         options?: never;
@@ -341,6 +365,13 @@ export interface components {
              * @example 3fa85f64-5717-4562-b3fc-2c963f66afa6
              */
             conversationId?: string;
+        };
+        CreateConversationDto: {
+            /**
+             * @description Other user id. Creates or reuses the 1:1 DM.
+             * @example xY7kQp2mN8vR4tLw9sZcAb1dEf3g
+             */
+            recipientId: string;
         };
         ConversationResponseDto: {
             /** @example 3fa85f64-5717-4562-b3fc-2c963f66afa6 */
@@ -729,6 +760,86 @@ export interface operations {
             };
             /** @description Missing or invalid Firebase token */
             401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ConversationsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateConversationDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConversationResponseDto"];
+                };
+            };
+            /** @description Cannot create a conversation with yourself */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Missing or invalid Firebase token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Recipient was not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ConversationsController_findOne: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Conversation UUID */
+                conversationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConversationResponseDto"];
+                };
+            };
+            /** @description Missing or invalid Firebase token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Conversation not found */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
