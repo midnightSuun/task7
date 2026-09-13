@@ -10,8 +10,14 @@ export const HistoryBackButton = () => {
     }
 
     return (
-        <Button onClick={handleBack} variant="outline" size="icon">
-            <ArrowLeftIcon className="size-4" />
+        <Button
+            onClick={handleBack}
+            variant="outline"
+            size="icon"
+            aria-label="Go back"
+        >
+            <ArrowLeftIcon className="size-4" aria-hidden />
+            <span className="sr-only">Go back</span>
         </Button>
     )
 }

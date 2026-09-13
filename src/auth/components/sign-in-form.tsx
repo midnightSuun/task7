@@ -3,7 +3,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 
 import { Form, FormInput } from "@/components/form"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field"
 import { useNavigate } from "@tanstack/react-router"
 import { useSignInWithCredentials } from "../sign-in-with-credentials"
@@ -46,7 +46,7 @@ export const SignInForm = () => {
         <div className={"flex flex-col gap-6"}>
             <Card>
                 <CardHeader className="text-center">
-                    <CardTitle className="text-xl">Welcome back!</CardTitle>
+                    <h1 className="font-heading text-xl font-medium">Welcome back!</h1>
                     <CardDescription>
                         Login with your Google account
                     </CardDescription>

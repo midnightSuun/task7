@@ -1,33 +1,37 @@
+import { Link, useMatchRoute } from "@tanstack/react-router"
+import { MessageSquareIcon, NewspaperIcon, SparklesIcon, UsersIcon } from "lucide-react"
+
+import { NavUser } from "@/auth/components/user-nav"
 import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarSeparator,
 } from "@/components/ui/sidebar"
-import { NavUser } from "@/auth/components/user-nav"
-import { Link, useMatchRoute } from "@tanstack/react-router"
-import { FileIcon, MessageSquareIcon, UserIcon } from "lucide-react"
 
 const sidebarItems = [
     {
-        label: "Users",
-        icon: <UserIcon />,
-        to: "/users",
-    },
-    {
         label: "Posts",
-        icon: <FileIcon />,
+        icon: NewspaperIcon,
         to: "/posts",
     },
     {
+        label: "Users",
+        icon: UsersIcon,
+        to: "/users",
+    },
+    {
         label: "Chats",
-        icon: <MessageSquareIcon />,
+        icon: MessageSquareIcon,
         to: "/chats",
-    }
+    },
 ] as const
 
 export function AppSidebar() {
@@ -38,25 +42,35 @@ export function AppSidebar() {
             <SidebarHeader />
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarMenu>
-                        {sidebarItems.map((item) => (
-                            <SidebarMenuItem key={item.to}>
-                                <SidebarMenuButton
-                                    isActive={
-                                        !!matchRoute({ to: item.to, fuzzy: true }) ||
-                                        (item.to === "/posts" && !!matchRoute({ to: "/" }))
-                                    }
-                                    render={<Link to={item.to} />}
-                                >
-                                    {item.icon}
-                                    {item.label}
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
-                    </SidebarMenu>
+                    <SidebarGroupLabel>Menu</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {sidebarItems.map((item) => {
+                                const Icon = item.icon
+                                const isActive =
+                                    !!matchRoute({ to: item.to, fuzzy: true }) ||
+                                    (item.to === "/posts" && !!matchRoute({ to: "/" }))
+
+                                return (
+                                    <SidebarMenuItem key={item.to}>
+                                        <SidebarMenuButton
+                                            isActive={isActive}
+                                            tooltip={item.label}
+                                            render={<Link to={item.to} />}
+                                            className="h-10"
+                                        >
+                                            <Icon />
+                                            <span>{item.label}</span>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                )
+                            })}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
+                <SidebarSeparator />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

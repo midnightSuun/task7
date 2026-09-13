@@ -11,7 +11,7 @@ export function Layout({ children }: PropsWithChildren) {
             <AppSidebar />
             <SidebarInset>
                 <Header />
-                <main className="p-4 flex flex-col gap-4">
+                <main className="flex flex-1 flex-col gap-4 p-4 md:p-6">
                     {children}
                 </main>
             </SidebarInset>
