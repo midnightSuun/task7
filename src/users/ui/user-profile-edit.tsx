@@ -78,8 +78,10 @@ export const UserProfileEdit = () => {
   if (!isMe) return null
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      <h1>Edit Profile</h1>
+    <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6">
+      <h1 className="font-heading text-2xl font-semibold tracking-tight">
+        Edit profile
+      </h1>
 
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetTrigger

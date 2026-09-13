@@ -10,7 +10,9 @@ export const UserProfileCard = ({ label, value }: Props) =>
     <Card key={label}>
         <CardContent className="flex flex-col gap-1">
             <p className="text-sm text-muted-foreground">{label}</p>
-            <p className="text-2xl font-medium">{value}</p>
+            <p className="font-heading text-2xl font-semibold tracking-tight">
+                {value}
+            </p>
         </CardContent>
     </Card>
 )

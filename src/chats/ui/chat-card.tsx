@@ -11,15 +11,13 @@ type Props = {
 
 const formatLastMessageAt = (date: string) => {
     const parsed = new Date(date)
+    const time = format(parsed, "HH:mm")
 
-    if (isToday(parsed)) 
-        return format(parsed, "HH:mm")
-    if (isYesterday(parsed)) 
-        return "Yesterday"
-    if (isThisYear(parsed)) 
-        return format(parsed, "MMM d")
+    if (isToday(parsed)) return `Today, ${time}`
+    if (isYesterday(parsed)) return `Yesterday, ${time}`
+    if (isThisYear(parsed)) return format(parsed, "MMM d, HH:mm")
 
-    return format(parsed, "MMM d, yyyy")
+    return format(parsed, "MMM d, yyyy, HH:mm")
 }
 
 export const ChatCard = ({ conversation }: Props) => {
@@ -32,14 +30,14 @@ export const ChatCard = ({ conversation }: Props) => {
         <Link
             to="/chats/$chatId"
             params={{ chatId: conversation.id }}
-            className="block rounded-2xl outline-none transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
+            className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-            <Card>
+            <Card className="transition-colors hover:bg-accent/30 hover:ring-foreground/15">
                 <CardContent className="flex items-center gap-4">
                     <UserAvatar
                         displayName={participant.displayName}
                         avatar={participant.avatar}
-                        className="h-12 w-12"
+                        className="size-12"
                     />
                     <div className="min-w-0 flex-1">
                         <div className="flex items-baseline justify-between gap-3">

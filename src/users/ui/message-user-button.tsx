@@ -9,9 +9,10 @@ import { useCreateConversation } from "../api/create-conversation"
 
 type Props = {
     userId: User["id"]
+    size?: "sm" | "default"
 }
 
-export const MessageUserButton = ({ userId }: Props) => {
+export const MessageUserButton = ({ userId, size = "sm" }: Props) => {
     const navigate = useNavigate()
     const { mutateAsync: createConversation, isPending } = useCreateConversation()
     const { data: conversationsData } = useGetConversations()
@@ -45,7 +46,7 @@ export const MessageUserButton = ({ userId }: Props) => {
         <Button
             type="button"
             variant="outline"
-            size="sm"
+            size={size}
             disabled={isPending}
             onClick={handleMessage}
         >
