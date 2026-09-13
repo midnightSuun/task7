@@ -41,7 +41,6 @@ export function NavUser() {
               <UserAvatar displayName={user.displayName} avatar={user.avatar} />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.displayName}</span>
-                {user.primaryEmail && <span className="truncate text-xs">{user.primaryEmail}</span>}
               </div>
             </SidebarMenuButton>
           </DropdownMenuTrigger>

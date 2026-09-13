@@ -42,7 +42,10 @@ export function AppSidebar() {
                         {sidebarItems.map((item) => (
                             <SidebarMenuItem key={item.to}>
                                 <SidebarMenuButton
-                                    isActive={!!matchRoute({ to: item.to, fuzzy: true })}
+                                    isActive={
+                                        !!matchRoute({ to: item.to, fuzzy: true }) ||
+                                        (item.to === "/posts" && !!matchRoute({ to: "/" }))
+                                    }
                                     render={<Link to={item.to} />}
                                 >
                                     {item.icon}

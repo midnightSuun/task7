@@ -24,11 +24,6 @@ export const UserCard = ({ user }: Props) => (
                 />
                 <div className="min-w-0">
                     <p className="truncate font-medium">{user.displayName}</p>
-                    {user.primaryEmail && (
-                        <p className="truncate text-sm text-muted-foreground">
-                            {user.primaryEmail}
-                        </p>
-                    )}
                 </div>
             </CardContent>
         </Card>
