@@ -70,15 +70,27 @@ type UseCursorInfiniteQueryOptions<Path extends CursorPaginatedPath> = {
 
 const DEFAULT_PAGE_SIZE = 10
 
-export const useCursorInfiniteQuery = <Path extends CursorPaginatedPath>({
+export const getCursorInfiniteQueryKey = <Path extends CursorPaginatedPath>({
   path,
   queryKey,
   pageSize = DEFAULT_PAGE_SIZE,
   query,
   pathParams,
-}: UseCursorInfiniteQueryOptions<Path>) =>
-  useInfiniteQuery({
-    queryKey: [...queryKey, path, pageSize, query, pathParams],
+}: UseCursorInfiniteQueryOptions<Path>): QueryKey => [
+  ...queryKey,
+  path,
+  pageSize,
+  query,
+  pathParams,
+]
+
+export const useCursorInfiniteQuery = <Path extends CursorPaginatedPath>(
+  options: UseCursorInfiniteQueryOptions<Path>,
+) => {
+  const { path, pageSize = DEFAULT_PAGE_SIZE, query, pathParams } = options
+
+  return useInfiniteQuery({
+    queryKey: getCursorInfiniteQueryKey(options),
     initialPageParam: undefined as string | undefined,
     queryFn: async ({ pageParam, signal }) => {
       const { data, error } = await fetchClient.GET(path, {
@@ -107,3 +119,4 @@ export const useCursorInfiniteQuery = <Path extends CursorPaginatedPath>({
       return lastPage.meta.nextCursor ?? undefined
     },
   })
+}
