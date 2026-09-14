@@ -1,5 +1,5 @@
 import { Link, useMatchRoute } from "@tanstack/react-router"
-import { MessageSquareIcon, NewspaperIcon, SparklesIcon, UsersIcon } from "lucide-react"
+import { MessageSquareIcon, NewspaperIcon, UsersIcon } from "lucide-react"
 
 import { NavUser } from "@/auth/components/user-nav"
 import {
