@@ -133,10 +133,7 @@ export const ChatDetails = () => {
                                             {formatDayLabel(message.createdAt)}
                                         </p>
                                     )}
-                                    <ChatMessage
-                                        message={message}
-                                        isOwn={message.senderId === currentUser?.id}
-                                    />
+                                    <ChatMessage message={message} isOwn={message.senderId === currentUser?.id}/>
                                 </div>
                             )
                         })}

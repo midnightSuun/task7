@@ -46,10 +46,7 @@ export const PostDetail = () => {
                                 <p className="truncate font-medium leading-tight">
                                     {post.author.displayName}
                                 </p>
-                                <time
-                                    dateTime={post.createdAt}
-                                    className="text-sm text-muted-foreground"
-                                >
+                                <time dateTime={post.createdAt} className="text-sm text-muted-foreground">
                                     {format(post.createdAt, "MMM d, yyyy, HH:mm")}
                                 </time>
                             </div>

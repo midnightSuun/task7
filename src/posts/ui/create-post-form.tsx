@@ -102,9 +102,7 @@ export const CreatePostForm = () => {
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
-                        <DialogClose
-                            render={<Button variant="outline">Cancel</Button>}
-                        />
+                        <DialogClose render={<Button variant="outline">Cancel</Button>}/>
                         <FormButton>Post</FormButton>
                     </DialogFooter>
                 </Form>

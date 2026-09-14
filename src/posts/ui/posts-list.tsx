@@ -41,10 +41,7 @@ export const PostsList = ({ authorId }: Props) => {
     if (posts.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-card px-6 py-16 text-center ring-1 ring-foreground/10">
-                <FileTextIcon
-                    className="size-8 text-muted-foreground"
-                    aria-hidden
-                />
+                <FileTextIcon className="size-8 text-muted-foreground" aria-hidden/>
                 <p className="font-medium">No posts yet</p>
                 <p className="text-sm text-muted-foreground">
                     Nothing to show here yet.

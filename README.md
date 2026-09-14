@@ -2,6 +2,8 @@
 
 SPA социальной сети: посты, профили пользователей и личные чаты в реальном времени. Стек: **React 19**, **TypeScript**, **Vite**, **TanStack Router**, **TanStack Query**, **Tailwind CSS**, **shadcn/ui**. Авторизация через **Firebase Auth**, данные — через REST API и WebSocket.
 
+Деплой: [https://task7-ashen.vercel.app/](https://task7-ashen.vercel.app/)
+
 ## Функциональность
 
 - **Авторизация** — вход по email/паролю и через Google (Firebase). Приватные маршруты закрыты `AuthGuard`.

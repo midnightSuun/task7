@@ -39,10 +39,7 @@ export const PostCard = ({ post }: Props) => (
                     <p className="truncate font-medium leading-tight">
                         {post.author.displayName}
                     </p>
-                    <time
-                        dateTime={post.createdAt}
-                        className="text-xs text-muted-foreground"
-                    >
+                    <time dateTime={post.createdAt} className="text-xs text-muted-foreground">
                         {formatPostDate(post.createdAt)}
                     </time>
                 </div>
@@ -60,11 +57,7 @@ export const PostCard = ({ post }: Props) => (
                 </p>
             </Link>
             <div className="border-t border-border/70 pt-1">
-                <PostLikes
-                    postId={post.id}
-                    authorId={post.authorId}
-                    likes={post.likes}
-                />
+                <PostLikes postId={post.id} authorId={post.authorId} likes={post.likes}/>
             </div>
         </CardContent>
     </Card>
