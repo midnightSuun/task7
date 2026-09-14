@@ -1,17 +1,17 @@
-import { ChatsList } from "./chats-list"
+import { UsersList } from "./users-list"
 
-export const ChatsPage = () => {
+export const UsersPage = () => {
     return (
         <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
             <header className="space-y-1">
                 <h1 className="font-heading text-2xl font-semibold tracking-tight">
-                    Messages
+                    People
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                    Your direct messages
+                    Find someone to follow or message
                 </p>
             </header>
-            <ChatsList />
+            <UsersList />
         </div>
     )
 }

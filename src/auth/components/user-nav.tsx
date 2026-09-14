@@ -1,4 +1,5 @@
 import {
+  ChevronsUpDown,
   LogOut,
   User,
 } from "lucide-react"
@@ -30,20 +31,26 @@ export function NavUser() {
   if (!user) return null
 
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
+    <SidebarMenu className="w-full">
+      <SidebarMenuItem className="w-full">
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
+          <DropdownMenuTrigger
+            className="w-full"
+            render={
+              <SidebarMenuButton
+                size="lg"
+                className="w-full data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              />
+            }
+          >
               <UserAvatar displayName={user.displayName} avatar={user.avatar} />
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid min-w-0 flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.displayName}</span>
-                {user.primaryEmail && <span className="truncate text-xs">{user.primaryEmail}</span>}
+                <span className="truncate text-xs text-muted-foreground">
+                  View profile
+                </span>
               </div>
-            </SidebarMenuButton>
+              <ChevronsUpDown className="ml-auto size-4 text-muted-foreground" aria-hidden />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
@@ -51,7 +58,6 @@ export function NavUser() {
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem
                 nativeButton={false}
