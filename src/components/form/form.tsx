@@ -54,7 +54,7 @@ export const Form = <T extends FormData>({
     const handleFormSubmit: SubmitHandler<T> = async (data) => {
         await onSubmit(data);
         if (resetOnSubmit) {
-            reset();
+            reset(defaultValues);
         }
     };
 

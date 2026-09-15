@@ -1,26 +1,44 @@
 import type { ComponentProps } from "react"
+import { Controller, useFormContext } from "react-hook-form"
+
 import { Input } from "@/components/ui/input"
-import { useFormContext } from "react-hook-form";
-import type { FormData } from "./form";
+
+import type { FormData } from "./form"
 
 type Props<T extends FormData> = ComponentProps<typeof Input> & {
-    name: keyof T;
-};
+    name: keyof T
+}
 
 export const FormInput = <T extends FormData>({ name, ...props }: Props<T>) => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
-    const error = errors[name];
-    const errorMessage = error?.message;
+    const { control } = useFormContext()
 
     return (
-        <div className="grid gap-1">
-            <Input aria-invalid={Boolean(error)} {...props} {...register(name)} />
-            {typeof errorMessage === "string" && (
-                <p className="text-sm text-destructive">{errorMessage}</p>
-            )}
-        </div>
-    );
-};
+        <Controller
+            name={String(name)}
+            control={control}
+            render={({ field, fieldState }) => {
+                const errorMessage = fieldState.error?.message
+                const handleValueChange = (value: string) => {
+                    field.onChange(value)
+                }
+
+                return (
+                    <div className="grid gap-1">
+                        <Input
+                            {...props}
+                            name={field.name}
+                            value={field.value ?? ""}
+                            onBlur={field.onBlur}
+                            ref={field.ref}
+                            onValueChange={handleValueChange}
+                            aria-invalid={Boolean(fieldState.error)}
+                        />
+                        {typeof errorMessage === "string" && (
+                            <p className="text-sm text-destructive">{errorMessage}</p>
+                        )}
+                    </div>
+                )
+            }}
+        />
+    )
+}
