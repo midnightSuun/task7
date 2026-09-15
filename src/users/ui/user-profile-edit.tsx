@@ -130,7 +130,7 @@ export const UserProfileEdit = () => {
           onChange={handleFileChange}
         />
 
-      <Form onSubmit={handleSave} validationSchema={schema} defaultValues={{ displayName: user.displayName }} className="flex flex-col items-center gap-2">
+      <Form onSubmit={handleSave} validationSchema={schema} defaultValues={{ displayName: user.displayName }} resetOnSubmit={false} className="flex flex-col items-center gap-2">
         <FormInput<FormData> name="displayName" type="text" placeholder="Enter your new username" />
         <FormButton>Save</FormButton>
       </Form>

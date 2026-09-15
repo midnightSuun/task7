@@ -26,6 +26,7 @@ export type Props<T extends FormData> = PropsWithChildren<{
     className?: string;
     ref?: Ref<FormHandle<T>>;
     disabled?: boolean;
+    resetOnSubmit?: boolean;
 }>;
 
 export const Form = <T extends FormData>({
@@ -36,6 +37,7 @@ export const Form = <T extends FormData>({
     onSubmit,
     ref,
     disabled,
+    resetOnSubmit = true,
 }: Props<T>) => {
     const methods = useForm({
         disabled,
@@ -51,7 +53,9 @@ export const Form = <T extends FormData>({
 
     const handleFormSubmit: SubmitHandler<T> = async (data) => {
         await onSubmit(data);
-        reset();
+        if (resetOnSubmit) {
+            reset();
+        }
     };
 
     useImperativeHandle(
