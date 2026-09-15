@@ -19,6 +19,7 @@ export const ChatsList = () => {
         enabled: Boolean(hasNextPage) && !isFetchingNextPage,
         onIntersect: fetchNextPage,
         rootMargin: "200px",
+        skipFirstIntersect: (conversationsData?.pages.length ?? 0) > 1,
     })
 
     const conversations =

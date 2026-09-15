@@ -1,7 +1,7 @@
 import { FileTextIcon } from "lucide-react"
 
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 import type { Post } from "@/types"
 
 import { usePosts } from "../api/get-posts"
@@ -24,6 +24,7 @@ export const PostsList = ({ authorId }: Props) => {
         enabled: Boolean(hasNextPage) && !isFetchingNextPage,
         onIntersect: fetchNextPage,
         rootMargin: "200px",
+        skipFirstIntersect: (postsData?.pages.length ?? 0) > 1,
     })
 
     const posts = postsData?.pages.flatMap((page) => page.data) ?? []

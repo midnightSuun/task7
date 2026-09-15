@@ -3,7 +3,7 @@ import { PlusIcon } from "lucide-react"
 import { z } from "zod"
 
 import { useMe } from "@/auth/get-me"
-import { Form, FormInput } from "@/components/form"
+import { CHARACTER_LIMIT_EXCEEDED_MESSAGE, Form, FormInput, FormTextarea } from "@/components/form"
 import { FormButton } from "@/components/form/form-button"
 import { Button } from "@/components/ui/button"
 import {
@@ -22,9 +22,15 @@ import { UserAvatar } from "@/users/ui/user-avatar"
 
 import { useCreatePost } from "../api/create-post"
 
+const POST_TITLE_MAX_LENGTH = 100
+const POST_CONTENT_MAX_LENGTH = 500
+
 const schema = z.object({
-    title: z.string().min(1, "Title is required"),
-    content: z.string().min(1, "Content is required"),
+    title: z.string().max(POST_TITLE_MAX_LENGTH, CHARACTER_LIMIT_EXCEEDED_MESSAGE),
+    content: z
+        .string()
+        .min(1, "Content is required")
+        .max(POST_CONTENT_MAX_LENGTH, CHARACTER_LIMIT_EXCEEDED_MESSAGE),
 })
 
 type FormData = z.infer<typeof schema>
@@ -85,19 +91,22 @@ export const CreatePostForm = () => {
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="title">Title</Label>
+                            <Label htmlFor="title">Title (optional)</Label>
                             <FormInput<FormData>
                                 id="title"
                                 name="title"
                                 placeholder="Title"
+                                maxLength={POST_TITLE_MAX_LENGTH}
                             />
                         </Field>
                         <Field>
                             <Label htmlFor="content">Content</Label>
-                            <FormInput<FormData>
+                            <FormTextarea<FormData>
                                 id="content"
                                 name="content"
                                 placeholder="What's new?"
+                                rows={5}
+                                maxLength={POST_CONTENT_MAX_LENGTH}
                             />
                         </Field>
                     </FieldGroup>

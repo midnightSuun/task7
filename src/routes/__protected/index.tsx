@@ -1,7 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router"
-
-import { PostsPage } from "@/posts/ui/posts-page"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/__protected/")({
-    component: PostsPage,
+    beforeLoad: () => {
+        throw redirect({
+            to: "/posts",
+            replace: true,
+        })
+    },
 })

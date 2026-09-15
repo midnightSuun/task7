@@ -49,10 +49,12 @@ export const PostCard = ({ post }: Props) => (
                 params={{ postId: post.id }}
                 className="block space-y-1.5 rounded-lg outline-none transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
             >
-                <p className="font-heading text-base font-semibold tracking-tight">
-                    {post.title}
-                </p>
-                <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                {post.title ? (
+                    <p className="font-heading text-base font-semibold tracking-tight">
+                        {post.title}
+                    </p>
+                ) : null}
+                <p className="line-clamp-3 whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
                     {post.content}
                 </p>
             </Link>

@@ -92,6 +92,8 @@ export const useCursorInfiniteQuery = <Path extends CursorPaginatedPath>(
   return useInfiniteQuery({
     queryKey: getCursorInfiniteQueryKey(options),
     initialPageParam: undefined as string | undefined,
+    staleTime: 60 * 1000,
+    refetchOnWindowFocus: false,
     queryFn: async ({ pageParam, signal }) => {
       const { data, error } = await fetchClient.GET(path, {
         params: {

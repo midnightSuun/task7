@@ -19,6 +19,7 @@ export const UsersList = () => {
         enabled: Boolean(hasNextPage) && !isFetchingNextPage,
         onIntersect: fetchNextPage,
         rootMargin: "200px",
+        skipFirstIntersect: (usersData?.pages.length ?? 0) > 1,
     })
 
     const users = usersData?.pages.flatMap((page) => page.data) ?? []

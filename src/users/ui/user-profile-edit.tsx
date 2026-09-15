@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-import { Form, FormInput } from "@/components/form"
+import { CHARACTER_LIMIT_EXCEEDED_MESSAGE, Form, FormInput } from "@/components/form"
 import { FormButton } from "@/components/form/form-button"
 import { z } from "zod"
 import { useUser } from "../api/get-user"
@@ -25,8 +25,13 @@ import { useDeleteAvatar } from "../api/delete-avatar"
 
 const route = getRouteApi("/__protected/users/$userId_/edit")
 
+const DISPLAY_NAME_MAX_LENGTH = 50
+
 const schema = z.object({
-  displayName: z.string().min(1, "Display name is required"),
+  displayName: z
+    .string()
+    .min(1, "Display name is required")
+    .max(DISPLAY_NAME_MAX_LENGTH, CHARACTER_LIMIT_EXCEEDED_MESSAGE),
 })
 
 type FormData = z.infer<typeof schema>
@@ -131,7 +136,12 @@ export const UserProfileEdit = () => {
         />
 
       <Form onSubmit={handleSave} validationSchema={schema} defaultValues={{ displayName: user.displayName }} resetOnSubmit={false} className="flex flex-col items-center gap-2">
-        <FormInput<FormData> name="displayName" type="text" placeholder="Enter your new username" />
+        <FormInput<FormData>
+          name="displayName"
+          type="text"
+          placeholder="Enter your new username"
+          maxLength={DISPLAY_NAME_MAX_LENGTH}
+        />
         <FormButton>Save</FormButton>
       </Form>
     </div>

@@ -54,9 +54,11 @@ export const PostDetail = () => {
                     </Link>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-5">
-                    <h1 className="font-heading text-3xl font-semibold tracking-tight text-balance">
-                        {post.title}
-                    </h1>
+                    {post.title ? (
+                        <h1 className="font-heading text-3xl font-semibold tracking-tight text-balance">
+                            {post.title}
+                        </h1>
+                    ) : null}
                     <p className="whitespace-pre-wrap text-base leading-relaxed text-foreground/90">
                         {post.content}
                     </p>

@@ -3,16 +3,25 @@ import { useEffect, useRef } from "react"
 type UseIntersectionObserverOptions = IntersectionObserverInit & {
     enabled?: boolean
     onIntersect: () => void
+    skipFirstIntersect?: boolean
 }
 
 export const useIntersectionObserver = <T extends HTMLElement = HTMLDivElement>({
     enabled = true,
     onIntersect,
+    skipFirstIntersect = false,
     root,
     rootMargin,
     threshold,
 }: UseIntersectionObserverOptions) => {
     const ref = useRef<T>(null)
+    const onIntersectRef = useRef(onIntersect)
+    const skipFirstIntersectRef = useRef(skipFirstIntersect)
+    const hasHandledFirstCallbackRef = useRef(false)
+
+    useEffect(() => {
+        onIntersectRef.current = onIntersect
+    }, [onIntersect])
 
     useEffect(() => {
         const element = ref.current
@@ -22,10 +31,19 @@ export const useIntersectionObserver = <T extends HTMLElement = HTMLDivElement>(
         const observer = new IntersectionObserver(
             (entries) => {
                 const [entry] = entries
+                const isIntersecting = Boolean(entry?.isIntersecting)
 
-                if (!entry.isIntersecting) return
+                if (!hasHandledFirstCallbackRef.current) {
+                    hasHandledFirstCallbackRef.current = true
 
-                onIntersect()
+                    if (skipFirstIntersectRef.current && isIntersecting) {
+                        return
+                    }
+                }
+
+                if (!isIntersecting) return
+
+                onIntersectRef.current()
             },
             { root, rootMargin, threshold },
         )
@@ -35,7 +53,7 @@ export const useIntersectionObserver = <T extends HTMLElement = HTMLDivElement>(
         return () => {
             observer.disconnect()
         }
-    }, [enabled, onIntersect, root, rootMargin, threshold])
+    }, [enabled, root, rootMargin, threshold])
 
     return ref
 }

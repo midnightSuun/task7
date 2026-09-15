@@ -1,27 +1,16 @@
-import type { ComponentProps } from "react"
+import type { ChangeEvent, ComponentProps } from "react"
 import { Controller, useFormContext } from "react-hook-form"
 
-import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 import type { FormData } from "./form"
+import { clampWithCharacterLimit } from "./form-input"
 
-export const CHARACTER_LIMIT_EXCEEDED_MESSAGE =
-    "превышено допустимое количество символов"
-
-export const clampWithCharacterLimit = (value: string, maxLength?: number) => {
-    if (typeof maxLength === "number" && value.length > maxLength) {
-        window.alert(CHARACTER_LIMIT_EXCEEDED_MESSAGE)
-        return value.slice(0, maxLength)
-    }
-
-    return value
-}
-
-type Props<T extends FormData> = ComponentProps<typeof Input> & {
+type Props<T extends FormData> = ComponentProps<typeof Textarea> & {
     name: keyof T
 }
 
-export const FormInput = <T extends FormData>({ name, maxLength, ...props }: Props<T>) => {
+export const FormTextarea = <T extends FormData>({ name, maxLength, ...props }: Props<T>) => {
     const { control } = useFormContext()
 
     return (
@@ -30,19 +19,19 @@ export const FormInput = <T extends FormData>({ name, maxLength, ...props }: Pro
             control={control}
             render={({ field, fieldState }) => {
                 const errorMessage = fieldState.error?.message
-                const handleValueChange = (value: string) => {
-                    field.onChange(clampWithCharacterLimit(value, maxLength))
+                const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+                    field.onChange(clampWithCharacterLimit(event.target.value, maxLength))
                 }
 
                 return (
                     <div className="grid gap-1">
-                        <Input
+                        <Textarea
                             {...props}
                             name={field.name}
                             value={field.value ?? ""}
                             onBlur={field.onBlur}
                             ref={field.ref}
-                            onValueChange={handleValueChange}
+                            onChange={handleChange}
                             aria-invalid={Boolean(fieldState.error)}
                         />
                         {typeof errorMessage === "string" && (
