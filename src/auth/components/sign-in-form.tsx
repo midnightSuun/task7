@@ -28,10 +28,15 @@ const SignInInput = FormInput<FormData>
 export const SignInForm = () => {
     const { mutateAsync: signInWithCredentials } = useSignInWithCredentials()
     const navigate = useNavigate()
-    const { mutateAsync: signInWithGoogle } = useSignInWithGoogle()
+    const { signInWithGoogle } = useSignInWithGoogle()
 
     const handleSignInWithGoogle = async () => {
-        await signInWithGoogle()
+        const user = await signInWithGoogle()
+
+        if (!user) {
+            return
+        }
+
         navigate({ to: "/" })
     }
 

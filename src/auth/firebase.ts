@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth"
+import { getAuth, getRedirectResult } from "firebase/auth"
 
 import { env } from "@/env"
 
@@ -14,3 +14,5 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig)
 export const firebaseAuth = getAuth(firebaseApp)
+
+void getRedirectResult(firebaseAuth)
